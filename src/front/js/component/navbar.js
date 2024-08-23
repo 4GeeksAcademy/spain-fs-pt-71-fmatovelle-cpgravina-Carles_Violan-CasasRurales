@@ -13,12 +13,18 @@ export const Navbar = () => {
 						<button className="btn btn-primary">Check the Context in action</button>
 					</Link>
 				</div>
+				<div className="d-flex justify-content-end">
 				<div className="ml-auto">
 					<Link to="/login">
-						<button className="btn btn-primary">Login</button>
+						<button className="btn btn-primary me-2">Login</button>
 					</Link>
 				</div>
-				
+				<div className="ml-auto">
+					<Link to="/register">
+						<button className="btn btn-primary">Register</button>
+					</Link>
+				</div>
+				</div>
 			</div>
 		</nav>
 	);
