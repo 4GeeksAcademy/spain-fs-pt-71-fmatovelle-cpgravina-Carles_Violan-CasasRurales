@@ -1,23 +1,17 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-// import AlertModal from "../component/alertmodal"; // importar el componente AlertModal
+
 
 export const Login = () => {
   const { actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
+ 
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    const success = await actions.login(email, password, navigate);
-    if (!success) {
-      setShowAlert(true);
-    }
-  };
+ 
 
-  const handleCloseAlert = () => setShowAlert(false);
 
   return (
     <div className="container mt-5">
@@ -40,7 +34,7 @@ export const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
         className="form-control my-2"
       />
-      <button className="btn btn-primary" onClick={handleLogin}>Login</button>
+      <button className="btn btn-primary" onClick="">Login</button>
 
       {/* <AlertModal show={showAlert} handleClose={handleCloseAlert} /> */}
     </div>
