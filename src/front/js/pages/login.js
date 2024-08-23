@@ -19,6 +19,7 @@ export const Login = () => {
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
+
               <h2 className="card-title text-center">Login / CreateUser</h2>
       <input
         type="email"
@@ -36,11 +37,31 @@ export const Login = () => {
       />
       <button className="btn btn-primary" onClick="">Login</button>
 
-      {/* <AlertModal show={showAlert} handleClose={handleCloseAlert} /> */}
-    </div>
-    </div>
-    </div>
+              <h2 className="card-title text-center">Login</h2>
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="form-control my-2"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="form-control my-2"
+              />
+              <button className="btn btn-primary" onClick={handleLogin}>
+                Login
+              </button>
+
+
+              {/* <AlertModal show={showAlert} handleClose={handleCloseAlert} /> */}
+            </div>
+          </div>
         </div>
       </div>
+    </div>
   );
 };

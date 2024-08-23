@@ -18,35 +18,41 @@ export const Register = () => {
 
     return (
         <div className="container mt-5">
-            <h2>Register</h2>
-            <div className="mb-3">
-                <label className="form-label">Username</label>
-                <input
+          <div className="row justify-content-center">
+            <div className="col-md-6">
+              <div className="card">
+                <div className="card-body">
+                  <h2 className="card-title text-center">Register</h2>
+                  <input
                     type="text"
-                    className="form-control"
+                    placeholder="Username"
                     value={userName}
                     onChange={(e) => setUsername(e.target.value)}
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Email</label>
-                <input
+                    className="form-control my-2"
+                  />
+                  <input
                     type="email"
-                    className="form-control"
+                    placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Password</label>
-                <input
+                    className="form-control my-2"
+                  />
+                  <input
                     type="password"
-                    className="form-control"
+                    placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                />
+                    className="form-control my-2"
+                  />
+                  <button className="btn btn-primary" onClick={handleRegister}>
+                    Register
+                  </button>
+    
+                  {/* <AlertModal show={showAlert} handleClose={handleCloseAlert} /> */}
+                </div>
+              </div>
             </div>
-            <button onClick={handleRegister} className="btn btn-primary">Register</button>
+          </div>
         </div>
-    );
-};
+      );
+    };
