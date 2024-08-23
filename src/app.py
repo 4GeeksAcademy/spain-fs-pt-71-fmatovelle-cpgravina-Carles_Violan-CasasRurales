@@ -12,6 +12,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from flask import Flask
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
 CORS(app)  # Esto habilitará CORS para todas las rutas
@@ -33,8 +34,11 @@ else:
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JWT_SECRET_KEY'] = 'esosesabra?' 
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
+
+jwt = JWTManager(app)
 
 # add the admin
 setup_admin(app)

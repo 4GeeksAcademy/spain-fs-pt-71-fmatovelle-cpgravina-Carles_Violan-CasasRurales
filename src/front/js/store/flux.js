@@ -1,35 +1,6 @@
 import axios from "axios";
 
 const getState = ({ getStore, getActions, setStore }) => {
-
-	return {
-		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
-		},
-		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},		
-			register: async (userName, email, password, navigate) => {
-				const bodyData = {
-					userName,
-					email,
-					password
-				};
-
   return {
     store: {
       message: null,
@@ -47,11 +18,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
     },
     actions: {
-      // Use getActions to call a function within a fuction
+      // Use getActions to call a function within a function
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
-      // Use getActions to call a function within a fuction
+
       login: async (email, password, navigate) => {
         const bodyData = {
           email,
@@ -65,8 +36,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           const { access_token } = res.data;
           if (access_token) {
             localStorage.setItem("accessToken", access_token);
-            await getActions().getCurrentUser(); // Obtén el usuario actual después de iniciar sesión
-            navigate("/protected"); // Redirige a la página protegida
+            await getActions().getCurrentUser(); // Obtain the current user after login
+            navigate("/protected"); // Redirect to the protected page
             return true;
           }
           return false;
@@ -88,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             bodyData
           );
           if (res.status === 200) {
-            navigate("/login"); // Redirige al login después de un registro exitoso
+            navigate("/login"); // Redirect to login after a successful registration
             return true;
           }
           return false;
@@ -97,7 +68,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           return false;
         }
       },
-
 
       getMessage: async () => {
         try {
@@ -111,6 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
