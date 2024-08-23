@@ -21,32 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
-			},
-			// Use getActions to call a function within a fuction
-			login: async (email, password, navigate) => {
-				const bodyData = {
-				email,
-				password,
-				};
-				try {
-				const res = await axios.post(
-					`${process.env.BACKEND_URL}/api/login`,
-					bodyData
-				);
-				const { access_token } = res.data;
-				if (access_token) {
-					localStorage.setItem("accessToken", access_token);
-					await getActions().getCurrentUser(); // Obtén el usuario actual después de iniciar sesión
-					navigate("/protected"); // Redirige a la página protegida
-					return true;
-				}
-				return false;
-				} catch (error) {
-				console.log("Error during login", error);
-				return false;
-				}
-			},
-
+			},		
 			register: async (userName, email, password, navigate) => {
 				const bodyData = {
 					userName,

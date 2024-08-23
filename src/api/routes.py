@@ -4,13 +4,13 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Traveler
 from api.utils import generate_sitemap, APIException
-from flask_cors import CORS
+
 
 # from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity, create_access_token
 from flask import Flask
 
 api = Flask(__name__)
-CORS(api)
+
 
 # api = Flask(__name__)
 
@@ -61,16 +61,7 @@ def register_user():
 
 
 # Autenticación de usuarios para obtener el token JWT
-@api.route('/login', methods=['POST'])
-def login():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    user = User.query.filter_by(email=email, password=password).first()
-    if user is None:
-        return jsonify({"msg": "Bad username or password"}), 401
 
-    access_token = create_access_token(identity=user.id)
-    return jsonify(access_token=access_token), 200
 
 # @api.route('/hello', methods=['POST', 'GET'])
 # def handle_hello():
