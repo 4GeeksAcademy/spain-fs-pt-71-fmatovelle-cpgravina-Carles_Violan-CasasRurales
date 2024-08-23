@@ -17,7 +17,6 @@ from flask_jwt_extended import JWTManager
 app = Flask(__name__)
 CORS(app)  # Esto habilitará CORS para todas las rutas
 
-# from models import Person
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
@@ -33,10 +32,13 @@ if db_url is not None:
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
 
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'esosesabra?' 
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
+
+jwt = JWTManager(app)
 
 # add the admin
 setup_admin(app)
