@@ -50,15 +50,6 @@ def register_user():
 
     return jsonify({"message": "User registered successfully"}), 200
 
-# @api.route('/test', methods=['GET'])
-# def test_route():
-#     return jsonify({"message": "Test route is working!"}), 200
-
-# @api.route('/test-post', methods=['POST'])
-# def test_post_route():
-#     return jsonify({"message": "POST route is working!"}), 200
-
-
 
 # Autenticación de usuarios para obtener el token JWT
 @api.route('/login', methods=['POST'])
@@ -72,11 +63,3 @@ def login():
     access_token = create_access_token(identity=user.id)
     return jsonify(access_token=access_token), 200
 
-# @api.route('/hello', methods=['POST', 'GET'])
-# def handle_hello():
-
-#     response_body = {
-#         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-#     }
-
-#     return jsonify(response_body), 200
