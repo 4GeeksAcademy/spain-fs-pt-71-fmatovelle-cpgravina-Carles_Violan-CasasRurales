@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Traveler
+from api.models import db, Traveler, House
 from api.utils import generate_sitemap, APIException
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
@@ -91,90 +91,103 @@ def get_traveler_profile():
 
 
 # ENDPOINT CREAR CASAS RURALES
-
-@api.route('/casasrurales', methods=['POST'])
+@api.route('/houses', methods=['POST'])
 @jwt_required()
-def create_casa_rural():
+def create_house():
     body = request.get_json()
 
     if not body:
         return jsonify({"msg": "Invalid JSON"}), 400
 
-    new_casa = CasaRural(
+    new_house = House(
         name=body.get('name'),
-        location=body.get('location'),
-        price_per_night=body.get('price_per_night'),
-        description=body.get('description')
+        address=body.get('address'),
+        type=body.get('type'),
+        image1=body.get('image1'),
+        image2=body.get('image2'),
+        image3=body.get('image3'),
+        image4=body.get('image4')
     )
-    db.session.add(new_casa)
+    db.session.add(new_house)
     db.session.commit()
 
-    return jsonify({"msg": "Casa rural created successfully", "casa": new_casa.id}), 201
+    return jsonify({"msg": "House created successfully", "house": new_house.serialize()}), 201
+
 
 
 # ENDPOINT MOSTRAR CASAS RURALES DISPONIBLES
 
-@api.route('/casasrurales', methods=['GET'])
-def get_all_casas_rurales():
-    casas = CasaRural.query.all()
-    casas_list = [{"id": casa.id, "name": casa.name, "location": casa.location, "price_per_night": casa.price_per_night} for casa in casas]
-    return jsonify(casas_list), 200
+@api.route('/houses', methods=['GET'])
+def get_all_houses():
+    houses = House.query.all()
+    houses_list = [house.serialize() for house in houses]
+    return jsonify(houses_list), 200
 
 
 # ENDPOINT CASAS RURALES POR ID
 
-@api.route('/casasrurales/<int:id>', methods=['GET'])
-def get_casa_rural(id):
-    casa = CasaRural.query.get(id)
+@api.route('/houses/<int:id>', methods=['GET'])
+def get_house(id):
+    house = House.query.get(id)
 
-    if not casa:
-        return jsonify({"msg": "Casa rural not found"}), 404
+    if not house:
+        return jsonify({"msg": "House not found"}), 404
 
-    return jsonify({
-        "id": casa.id,
-        "name": casa.name,
-        "location": casa.location,
-        "price_per_night": casa.price_per_night,
-        "description": casa.description
-    }), 200
+    return jsonify(house.serialize()), 200
 
+# ENDPOINT PARA ACTUALIZAR/EDITAR DATOS DE CASAS RURALES 
 
-# ENDPOINT PARA ACTUALIZAR DATOS DE CASAS RURALES 
-
-@api.route('/casasrurales/<int:id>', methods=['PUT'])
+@api.route('/houses/<int:id>', methods=['PUT'])
 @jwt_required()
-def update_casa_rural(id):
+def update_house(id):
     body = request.get_json()
 
-    casa = CasaRural.query.get(id)
+    house = House.query.get(id)
 
-    if not casa:
-        return jsonify({"msg": "Casa rural not found"}), 404
+    if not house:
+        return jsonify({"msg": "House not found"}), 404
 
-    casa.name = body.get('name', casa.name)
-    casa.location = body.get('location', casa.location)
-    casa.price_per_night = body.get('price_per_night', casa.price_per_night)
-    casa.description = body.get('description', casa.description)
+    house.name = body.get('name', house.name)
+    house.address = body.get('address', house.address)
+    house.type = body.get('type', house.type)
+    house.image1 = body.get('image1', house.image1)
+    house.image2 = body.get('image2', house.image2)
+    house.image3 = body.get('image3', house.image3)
+    house.image4 = body.get('image4', house.image4)
 
     db.session.commit()
 
-    return jsonify({"msg": "Casa rural updated successfully"}), 200
+    return jsonify({"msg": "House updated successfully", "house": house.serialize()}), 200
 
 
 # ENDPOINT PARA ELIMINAR CASAS RURALES 
 
-@api.route('/casasrurales/<int:id>', methods=['DELETE'])
+@api.route('/houses/<int:id>', methods=['DELETE'])
 @jwt_required()
-def delete_casa_rural(id):
-    casa = CasaRural.query.get(id)
+def delete_house(id):
+    house = House.query.get(id)
 
-    if not casa:
-        return jsonify({"msg": "Casa rural not found"}), 404
+    if not house:
+        return jsonify({"msg": "House not found"}), 404
 
-    db.session.delete(casa)
+    db.session.delete(house)
     db.session.commit()
 
-    return jsonify({"msg": "Casa rural deleted successfully"}), 200
+    return jsonify({"msg": "House deleted successfully"}), 200
+
+
+
+# ENDPOINT PARA VER DETTALES ADICIONALES/ INFORMACION SENSIBLE: DESCRIPTION, PPN, AVAILABILITY, CONTACT INFO, SPECIFIC ADDRESS. SE NECESITARIA AGREGAR DATOS EN EL MODELO. 
+
+# @api.route('/houses/<int:id>/details', methods=['GET'])
+# @jwt_required()
+# def get_house_details(house_id):
+#     house = House.query.get(house_id)
+#     if house is None:
+#         return jsonify({"msg": "House not found"}), 404
+    
+#     return jsonify(house.serialize_details()), 200
+
 
 
 
