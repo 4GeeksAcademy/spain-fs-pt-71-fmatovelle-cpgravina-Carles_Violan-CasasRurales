@@ -30,7 +30,7 @@ def register_user():
     # Check if the email already exists
     existing_traveler = Traveler.query.filter_by(email=body['email']).first()
     if existing_traveler:
-        return jsonify({"message": "Email already in use"}), 409  # 409 Conflict
+        return jsonify({"message": "Email already in use"}), 409  
 
     try:
         # Create a new Traveler instance
@@ -39,10 +39,10 @@ def register_user():
         db.session.add(new_traveler)
         db.session.commit()
 
-        return jsonify({"message": "User registered successfully"}), 201  # 201 Created
+        return jsonify({"message": "User registered successfully"}), 201  
     except IntegrityError:
-        db.session.rollback()  # Rollback the session to undo any changes
-        return jsonify({"message": "An error occurred during registration"}), 500  # 500 Internal Server Error
+        db.session.rollback()  
+        return jsonify({"message": "An error occurred during registration"}), 500  
 
 # Autenticación de usuarios para obtener el token JWT
 
@@ -87,6 +87,97 @@ def get_traveler_profile():
     }
 
     return jsonify(profile)
+
+
+
+# ENDPOINT CREAR CASAS RURALES
+
+@api.route('/casasrurales', methods=['POST'])
+@jwt_required()
+def create_casa_rural():
+    body = request.get_json()
+
+    if not body:
+        return jsonify({"msg": "Invalid JSON"}), 400
+
+    new_casa = CasaRural(
+        name=body.get('name'),
+        location=body.get('location'),
+        price_per_night=body.get('price_per_night'),
+        description=body.get('description')
+    )
+    db.session.add(new_casa)
+    db.session.commit()
+
+    return jsonify({"msg": "Casa rural created successfully", "casa": new_casa.id}), 201
+
+
+# ENDPOINT MOSTRAR CASAS RURALES DISPONIBLES
+
+@api.route('/casasrurales', methods=['GET'])
+def get_all_casas_rurales():
+    casas = CasaRural.query.all()
+    casas_list = [{"id": casa.id, "name": casa.name, "location": casa.location, "price_per_night": casa.price_per_night} for casa in casas]
+    return jsonify(casas_list), 200
+
+
+# ENDPOINT CASAS RURALES POR ID
+
+@api.route('/casasrurales/<int:id>', methods=['GET'])
+def get_casa_rural(id):
+    casa = CasaRural.query.get(id)
+
+    if not casa:
+        return jsonify({"msg": "Casa rural not found"}), 404
+
+    return jsonify({
+        "id": casa.id,
+        "name": casa.name,
+        "location": casa.location,
+        "price_per_night": casa.price_per_night,
+        "description": casa.description
+    }), 200
+
+
+# ENDPOINT PARA ACTUALIZAR DATOS DE CASAS RURALES 
+
+@api.route('/casasrurales/<int:id>', methods=['PUT'])
+@jwt_required()
+def update_casa_rural(id):
+    body = request.get_json()
+
+    casa = CasaRural.query.get(id)
+
+    if not casa:
+        return jsonify({"msg": "Casa rural not found"}), 404
+
+    casa.name = body.get('name', casa.name)
+    casa.location = body.get('location', casa.location)
+    casa.price_per_night = body.get('price_per_night', casa.price_per_night)
+    casa.description = body.get('description', casa.description)
+
+    db.session.commit()
+
+    return jsonify({"msg": "Casa rural updated successfully"}), 200
+
+
+# ENDPOINT PARA ELIMINAR CASAS RURALES 
+
+@api.route('/casasrurales/<int:id>', methods=['DELETE'])
+@jwt_required()
+def delete_casa_rural(id):
+    casa = CasaRural.query.get(id)
+
+    if not casa:
+        return jsonify({"msg": "Casa rural not found"}), 404
+
+    db.session.delete(casa)
+    db.session.commit()
+
+    return jsonify({"msg": "Casa rural deleted successfully"}), 200
+
+
+
 
 
 
