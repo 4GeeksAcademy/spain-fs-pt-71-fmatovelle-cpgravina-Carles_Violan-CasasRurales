@@ -7,7 +7,7 @@ export const Protected = () => {
     const { store, actions } = useContext(Context);
     useEffect(() => {
         actions.getCurrentUser();
-    }, [actions]);
+    }, []);
 
     return (
         <div className="text-center mt-5">
