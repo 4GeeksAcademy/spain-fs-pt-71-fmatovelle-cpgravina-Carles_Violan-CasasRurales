@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Traveler, House
+from api.models import db, Traveler, House, Feedback
 from api.utils import generate_sitemap, APIException
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
@@ -187,6 +187,19 @@ def delete_house(id):
 #         return jsonify({"msg": "House not found"}), 404
     
 #     return jsonify(house.serialize_details()), 200
+
+@api.route('/submit-feedback', methods=['POST'])
+def submit_feedback():
+    data = request.json
+    new_feedback = Feedback(
+        name=data['name'],
+        email=data['email'],
+        ratings=data['ratings'],
+        message=data.get('message')
+    )
+    db.session.add(new_feedback)
+    db.session.commit()
+    return jsonify({"message": "Feedback submitted successfully!"}), 201
 
 
 

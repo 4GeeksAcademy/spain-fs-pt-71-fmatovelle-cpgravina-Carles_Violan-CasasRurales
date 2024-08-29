@@ -6,3 +6,7 @@ footer {
 .nav-link {
     color: gray;
   }
+
+.static-btn {
+    background-color: chartreuse;
+}
