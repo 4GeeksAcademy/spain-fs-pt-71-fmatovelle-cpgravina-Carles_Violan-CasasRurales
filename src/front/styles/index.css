@@ -1,3 +1,24 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+
+.brand-name {
+    color: rgba(119, 233, 5, 0.776);
+}
+
+
+.globe-button,
+.user-button,
+.search-button {
+    background-color: chartreuse;
+}
+
+.form-control {
+    height: 5rem;
+    border-radius: 10px;
+    transition: .5s ease;
+  }
+
+.navbar-btn {
+    height: 5rem;
+}
