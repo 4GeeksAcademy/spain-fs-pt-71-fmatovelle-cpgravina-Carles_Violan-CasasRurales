@@ -3,14 +3,15 @@
 */
 
 .brand-name {
-    color: rgba(119, 233, 5, 0.776);
+    color: rgb(91, 173, 9);
 }
 
 
 .globe-button,
 .user-button,
-.search-button {
-    background-color: chartreuse;
+.search-button,
+.search-icon {
+    background-color: rgb(91, 173, 9);
 }
 
 .form-control {
@@ -22,3 +23,26 @@
 .navbar-btn {
     height: 5rem;
 }
+
+footer {
+    
+    text-decoration: none;
+}
+
+.nav-link {
+    color: gray;
+  }
+
+.static-btn {
+    background-color:  rgb(91, 173, 9);
+}
+
+.bar {
+    width: 800px;  
+    height: 70px;  
+    border-radius: 50px;
+  }
+  
+  .bar input[type="text"]:focus {
+    outline: none;
+  }
