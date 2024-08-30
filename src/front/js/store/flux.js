@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       message: null,
-
+      token: null,
+      currentUser: null,
     },
     
     actions: {
@@ -124,26 +125,27 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      handleLogout: (navigate) => async (dispatch) => {
+      logout: async (navigate) => {
         try {
-          // Optionally notify the backend
-          await api.post('/logout');
-      
-          // Clear the token from localStorage (or sessionStorage/cookies)
-          localStorage.removeItem('authToken'); // Adjust the key based on your implementation
-          // sessionStorage.removeItem('authToken');
-          // document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      
-          // Dispatch action to clear user data in the store
-          dispatch({ type: 'LOGOUT_SUCCESS' });
-      
-          // Redirect to the login page or home page
-          navigate('/login');
+            localStorage.removeItem('accessToken');
+            setStore({ currentUser: null });
+            console.log("User logged out successfully");
+    
+            // Confirm the navigate function is being called
+            console.log("Navigating to home...");
+            navigate('/'); // Redirect the user to the home page
+            console.log("Navigation should have occurred");
+    
+            return true;  // Indicate success
         } catch (error) {
-          console.error("Logout failed", error);
-          // Optionally, handle the error (e.g., show a notification)
+            if (error.response) {
+                console.error("Error during logout:", error.response.data);
+            } else {
+                console.error("Logout failed due to an unexpected error:", error);
+            }
+            return false;  // Indicate failure
         }
-      },
+    },
 
       submitFeedback: async (name, email, ratings, message) => {
         const bodyData = { name, email, ratings, message };

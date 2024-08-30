@@ -18,11 +18,14 @@ export const Navbar = () => {
   }, []);
 
   const handleLogout = async () => {
-    await actions.logout(navigate);
+    const success = await actions.logout(navigate);
+    if (!success) {
+      alert("Logout failed, please try again.");
+    }
   };
 
   const handleSearch = () => {
-    // Implement search functionality here
+    // Implement search functionality here or remove this section if we will not use a search bar
     console.log({ destination, checkInDate, checkOutDate, guests });
   };
 
