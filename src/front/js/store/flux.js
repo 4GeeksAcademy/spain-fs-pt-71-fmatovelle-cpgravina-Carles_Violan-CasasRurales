@@ -8,10 +8,6 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     
     actions: {
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
-
       login: async (userName, email, password, navigate) => {
         const bodyData = {
             userName,
@@ -127,6 +123,26 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
+      submitFeedback: async (name, email, ratings, message) => {
+        const bodyData = { name, email, ratings, message };
+        try {
+          console.log('Submitting feedback:', bodyData);
+          const response = await axios.post(`${process.env.BACKEND_URL}/api/submit-feedback`, bodyData);
+      
+          console.log('Response received:', response);
+          
+          if (response.status === 200 || response.status === 201) {
+            return true; 
+          } else {
+            console.error('Feedback submission failed:', response.statusText);
+            return false; 
+          }
+        } catch (error) {
+          console.error('Error during feedback submission:', error.response ? error.response.data : error.message);
+          return false;
+        }
+      }
 
     },
   };
