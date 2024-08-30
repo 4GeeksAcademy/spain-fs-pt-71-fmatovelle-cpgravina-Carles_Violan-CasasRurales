@@ -10,28 +10,23 @@ favorite_houses = db.Table(
     db.Column('traveler_id', db.Integer, db.ForeignKey('traveler.id'), primary_key=True)
    
 )
-
 class Traveler(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userName = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), unique=False, nullable=False)
-    # favorite_houses = db.relationship('Traveler', secondary=favorite_houses, backref=db.backref('favorited_by_travelers', lazy='dynamic'))
-    favorite_houses = db.relationship('House', secondary=favorite_houses)
-    
-    # favorite = db.Column(db.Integer, unique=False, nullable=True)
-    
+    role = db.Column(db.String(20), unique=False, nullable=True, default='Traveler')
 
-    # def __repr__(self):
-    #     return '<User %r>' % self.userName
+    favorite_houses = db.relationship('House', secondary=favorite_houses)
 
     def serialize(self):
         return {
             "id": self.id,
             "userName": self.userName,
             "email": self.email,
-            # do not serialize the password, its a security breach
+            "role": self.role,  # Incluir el rol en la serialización
         }
+
 
 class House(db.Model):
     id = db.Column(db.Integer, primary_key=True)
