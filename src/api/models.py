@@ -2,32 +2,28 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
-    def __repr__(self):
-        return f'<User {self.email}>'
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
-        }
+# Tabla intermedia para la relación muchos a muchos entre usuarios y casas favoritas
+favorite_houses = db.Table(
+    'favorite_houses',
+    db.Column('house_id', db.Integer, db.ForeignKey('house.id'), primary_key=True),
+    db.Column('traveler_id', db.Integer, db.ForeignKey('traveler.id'), primary_key=True)
+   
+)
 
 class Traveler(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userName = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), unique=False, nullable=False)
+    # favorite_houses = db.relationship('Traveler', secondary=favorite_houses, backref=db.backref('favorited_by_travelers', lazy='dynamic'))
+    favorite_houses = db.relationship('House', secondary=favorite_houses)
+    
     # favorite = db.Column(db.Integer, unique=False, nullable=True)
     
 
-    def __repr__(self):
-        return '<User %r>' % self.username
+    # def __repr__(self):
+    #     return '<User %r>' % self.userName
 
     def serialize(self):
         return {
