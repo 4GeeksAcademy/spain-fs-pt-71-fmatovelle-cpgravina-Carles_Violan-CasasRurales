@@ -38,11 +38,12 @@ footer {
 }
 
 .bar {
-    width: 800px;  
+    width: 700px;  
     height: 70px;  
-    border-radius: 50px;
   }
   
-  .bar input[type="text"]:focus {
-    outline: none;
+  @media (max-width: 875px) {
+    .bar {
+      flex-direction: column;
+    }
   }

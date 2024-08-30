@@ -124,6 +124,27 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      handleLogout: (navigate) => async (dispatch) => {
+        try {
+          // Optionally notify the backend
+          await api.post('/logout');
+      
+          // Clear the token from localStorage (or sessionStorage/cookies)
+          localStorage.removeItem('authToken'); // Adjust the key based on your implementation
+          // sessionStorage.removeItem('authToken');
+          // document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      
+          // Dispatch action to clear user data in the store
+          dispatch({ type: 'LOGOUT_SUCCESS' });
+      
+          // Redirect to the login page or home page
+          navigate('/login');
+        } catch (error) {
+          console.error("Logout failed", error);
+          // Optionally, handle the error (e.g., show a notification)
+        }
+      },
+
       submitFeedback: async (name, email, ratings, message) => {
         const bodyData = { name, email, ratings, message };
         try {

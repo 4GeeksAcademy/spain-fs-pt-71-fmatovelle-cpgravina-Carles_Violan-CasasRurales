@@ -15,7 +15,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     actions.getCurrentUser();
-  }, [actions]);
+  }, []);
 
   const handleLogout = async () => {
     await actions.logout(navigate);
@@ -27,7 +27,7 @@ export const Navbar = () => {
   };
 
   return (
-    <header>
+    <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <Link className="navbar-brand d-flex align-items-center" to="/">
@@ -37,7 +37,9 @@ export const Navbar = () => {
               className="d-inline-block align-text-top"
               style={{ width: "auto", height: "65px" }}
             />
-            <span className="brand-name ms-2 fs-1 fw-bold">Rural Experience</span>
+            <span className="brand-name ms-2 fs-1 fw-bold">
+              Rural Experience
+            </span>
           </Link>
           <button
             className="navbar-toggler"
@@ -77,19 +79,24 @@ export const Navbar = () => {
                 <ul className="dropdown-menu fs-6 dropdown-menu-end mt-2 rounded">
                   {store.currentUser ? (
                     <>
-                      <p className="dropdown-item">Welcome, {store.currentUser.userName}</p>
+                      <p className="dropdown-item">
+                        Welcome, {store.currentUser.userName}
+                      </p>
                       <li>
                         <Link className="dropdown-item" to="/traveler/profile">
                           Profile
                         </Link>
                       </li>
                       <li>
-                        <Link className="dropdown-item" to="traveler/favorites">
+                        <Link className="dropdown-item" to="/traveler/favorites">
                           Favorites
                         </Link>
                       </li>
                       <li>
-                        <Link className="dropdown-item my-2" to="privacy-policy">
+                        <Link
+                          className="dropdown-item my-2"
+                          to="/privacy-policy"
+                        >
                           Privacy policy
                         </Link>
                       </li>
@@ -108,7 +115,7 @@ export const Navbar = () => {
                       <Link className="dropdown-item" to="/register">
                         Register
                       </Link>
-                      <Link className="dropdown-item " to="/login">
+                      <Link className="dropdown-item" to="/login">
                         Login
                       </Link>
                     </li>
@@ -119,55 +126,57 @@ export const Navbar = () => {
           </div>
         </div>
       </nav>
-      <div className="bar d-flex align-items-center justify-content-between mx-auto my-5 shadow p-1">
-        <div className="location flex-grow-1 px-4">
-          <p className="mb-1 text-primary-emphasis mt-2">Location</p>
-          <input
-            type="text"
-            className="form-control-plaintext text-secondary mb-1"
-            placeholder="Where are you going?"
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-          />
-        </div>
-        <div className="check-in flex-grow-1 px-4 border-start">
-          <p className="mb-1 text-primary-emphasis mt-2">Check in</p>
-          <input
-            type="date"
-            className="form-control-plaintext text-secondary mb-1"
-            placeholder="Add dates"
-            value={checkInDate}
-            onChange={(e) => setCheckInDate(e.target.value)}
-          />
-        </div>
-        <div className="check-out flex-grow-1 px-4 border-start">
-          <p className="mb-1 text-primary-emphasis mt-2">Check out</p>
-          <input
-            type="date"
-            className="form-control-plaintext text-secondary mb-1"
-            placeholder="Add dates"
-            value={checkOutDate}
-            onChange={(e) => setCheckOutDate(e.target.value)}
-          />
-        </div>
-        <div className="guests flex-grow-1 px-4 border-start position-relative">
-          <p className="mb-1 text-primary-emphasis mt-2">Guests</p>
-          <input
-            type="number"
-            className="form-control-plaintext mb-1"
-            placeholder="Add guests"
-            value={guests}
-            onChange={(e) => setGuests(e.target.value)}
-          />
-          <button
-            className="btn  position-absolute end-0 top-50 translate-middle-y rounded-circle p-3 search-icon"
-            style={{ width: "60px", height: "auto" }}
-            onClick={handleSearch}
-          >
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-12 col-md-10 col-lg-8">
+            <div className="d-flex flex-wrap input-group shadow">
+              <input
+                type="text"
+                className="form-control border-top-0 border-bottom-0 border-start-0 rounded-start-pill"
+                placeholder="Destination"
+                value={destination}
+                aria-label="Destination"
+                aria-describedby="search-destination"
+                onChange={(e) => setDestination(e.target.value)}
+              />
+              <input
+                type="date"
+                className="form-control border-top-0 border-bottom-0 border-end-0"
+                placeholder="Check-in"
+                aria-label="Check-in"
+                aria-describedby="search-check-in"
+                value={checkInDate}
+                onChange={(e) => setCheckInDate(e.target.value)}
+              />
+              <input
+                type="date"
+                className="form-control border-top-0 border-bottom-0 border-end-0"
+                placeholder="Check-out"
+                aria-label="Check-out"
+                aria-describedby="search-check-out"
+                value={checkOutDate}
+                onChange={(e) => setCheckOutDate(e.target.value)}
+              />
+              <input
+                type="number"
+                className="form-control border-top-0 border-bottom-0 border-end-0 rounded-end-circle"
+                placeholder="Guests"
+                aria-label="guests"
+                aria-describedby="search-guests"
+                value={guests}
+                onChange={(e) => setGuests(e.target.value)}
+              />
+              <span
+                className="input-group-text border-0 rounded-end-circle search-button"
+                id="search-addon"
+              >
+                <i className="fas fa-search"></i>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
+
