@@ -2,7 +2,7 @@
 import os
 from flask_admin import Admin
 
-from .models import db,Traveler, House
+from .models import db, Traveler, House, Feedback
 
 
 
@@ -18,6 +18,7 @@ def setup_admin(app):
 
     admin.add_view(ModelView(Traveler, db.session))
     admin.add_view(ModelView(House, db.session))
+    admin.add_view(ModelView(Feedback, db.session))
 
    
 
