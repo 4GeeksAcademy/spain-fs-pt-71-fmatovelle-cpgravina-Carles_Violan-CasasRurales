@@ -54,3 +54,24 @@ class House(db.Model):
             "image3": self.image3,
             "image4": self.image4,
         }
+    
+class Feedback(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    ratings = db.Column(db.JSON, nullable=False)  # Storing ratings as JSON object
+    message = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
+
+    def __repr__(self):
+        return f'<Feedback {self.name} - {self.email}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "ratings": self.ratings,
+            "message": self.message,
+            "created_at": self.created_at.isoformat(),
+        }
