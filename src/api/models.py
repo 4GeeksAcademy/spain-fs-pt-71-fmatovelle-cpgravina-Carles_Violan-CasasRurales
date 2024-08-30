@@ -24,7 +24,7 @@ class Traveler(db.Model):
             "id": self.id,
             "userName": self.userName,
             "email": self.email,
-            # "role": self.role,  # Incluir el rol en la serialización
+            "role": self.role,  # Incluir el rol en la serialización
         }
 
 
