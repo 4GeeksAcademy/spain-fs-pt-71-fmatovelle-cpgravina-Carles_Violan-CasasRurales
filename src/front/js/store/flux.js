@@ -165,8 +165,23 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error('Error during feedback submission:', error.response ? error.response.data : error.message);
           return false;
         }
-      }
+      },
 
+      getAllHouses: async () => {
+        try {
+            const response = await axios.get(`${process.env.BACKEND_URL}/api/houses`);
+            if (response.status === 200) {
+              setStore({ houses: response.data }); // Store the list of houses
+              return response.data;
+            } else {
+              console.error('Failed to fetch houses data, status:', response.status);
+              return [];
+            }
+          } catch (error) {
+            console.error('Error fetching houses data:', error.response ? error.response.data : error.message);
+            return [];
+          }
+      },
     },
   };
 };
