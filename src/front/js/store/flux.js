@@ -133,17 +133,17 @@ const getState = ({ getStore, getActions, setStore }) => {
     
             // Confirm the navigate function is being called
             console.log("Navigating to home...");
-            navigate('/'); // Redirect the user to the home page
+            navigate('/'); 
             console.log("Navigation should have occurred");
     
-            return true;  // Indicate success
+            return true; 
         } catch (error) {
             if (error.response) {
                 console.error("Error during logout:", error.response.data);
             } else {
                 console.error("Logout failed due to an unexpected error:", error);
             }
-            return false;  // Indicate failure
+            return false;  
         }
     },
 
@@ -171,7 +171,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
             const response = await axios.get(`${process.env.BACKEND_URL}/api/houses`);
             if (response.status === 200) {
-              setStore({ houses: response.data }); // Store the list of houses
+              setStore({ houses: response.data });
               return response.data;
             } else {
               console.error('Failed to fetch houses data, status:', response.status);
