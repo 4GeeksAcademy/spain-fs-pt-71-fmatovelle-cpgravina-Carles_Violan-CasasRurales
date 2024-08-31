@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       message: null,
-
+      token: null,
+      currentUser: null,
     },
     
     actions: {
@@ -123,6 +124,28 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
+      logout: async (navigate) => {
+        try {
+            localStorage.removeItem('accessToken');
+            setStore({ currentUser: null });
+            console.log("User logged out successfully");
+    
+            // Confirm the navigate function is being called
+            console.log("Navigating to home...");
+            navigate('/'); // Redirect the user to the home page
+            console.log("Navigation should have occurred");
+    
+            return true;  // Indicate success
+        } catch (error) {
+            if (error.response) {
+                console.error("Error during logout:", error.response.data);
+            } else {
+                console.error("Logout failed due to an unexpected error:", error);
+            }
+            return false;  // Indicate failure
+        }
+    },
 
       submitFeedback: async (name, email, ratings, message) => {
         const bodyData = { name, email, ratings, message };

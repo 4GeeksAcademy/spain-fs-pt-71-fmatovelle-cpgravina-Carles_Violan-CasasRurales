@@ -1,13 +1,22 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import { Link, useNavigate } from "react-router-dom";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
 export const Protected = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+
     useEffect(() => {
         actions.getCurrentUser();
     }, []);
+
+    useEffect(() => {
+        if (!store.currentUser) {
+            navigate('/'); // Redirect if no user is logged in
+        }
+    }, [store.currentUser, navigate]); // Dependency on store.currentUser
 
     return (
         <div className="text-center mt-5">

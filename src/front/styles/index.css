@@ -1,3 +1,29 @@
+/* 
+    General Styles used on every website (Don't Repeat Yourself)
+*/
+
+.brand-name {
+    color: rgb(91, 173, 9);
+}
+
+
+.globe-button,
+.user-button,
+.search-button,
+.search-icon {
+    background-color: rgb(91, 173, 9);
+}
+
+.form-control {
+    height: 5rem;
+    border-radius: 10px;
+    transition: .5s ease;
+  }
+
+.navbar-btn {
+    height: 5rem;
+}
+
 footer {
     
     text-decoration: none;
@@ -8,5 +34,16 @@ footer {
   }
 
 .static-btn {
-    background-color: chartreuse;
+    background-color:  rgb(91, 173, 9);
 }
+
+.bar {
+    width: 700px;  
+    height: 70px;  
+  }
+  
+  @media (max-width: 875px) {
+    .bar {
+      flex-direction: column;
+    }
+  }
