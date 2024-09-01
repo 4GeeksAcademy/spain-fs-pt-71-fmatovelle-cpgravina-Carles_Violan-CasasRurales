@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import carousel1 from "../../img/carousel1.jpeg";
 import carousel2 from "../../img/carousel2.jpeg";
 import carousel3 from "../../img/carousel3.jpeg";
+import { Link, useParams } from "react-router-dom";
 import "../../styles/home.css";
 
 export const Home = () => {
@@ -158,10 +159,19 @@ export const Home = () => {
             <h5 className="card-title">{house.name}</h5>
             <p className="card-text">{house.address}</p>
             <p className="card-text">Type: {house.type}</p>
+        
           </div>
+          
+          {/* <Link to="/single/" type="button" class="btn btn-success">Info</Link> */}
+          <Link to={`/single/${house.id}`} className="btn btn-success">
+                Info
+              </Link>
+            
         </div>
+        
       ))}
     </div>
+    
 	  {/* end of cards */}
 	  </div>
     </div>
