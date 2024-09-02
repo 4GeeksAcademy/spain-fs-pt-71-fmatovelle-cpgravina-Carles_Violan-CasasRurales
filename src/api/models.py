@@ -1,7 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
+import enum
 
 db = SQLAlchemy()
 
+class TravelerRole(enum.Enum):
+    ADMIN = "ADMIN"
+    TRAVELER = "TRAVELER"
 
 # Tabla intermedia para la relación muchos a muchos entre usuarios y casas favoritas
 favorite_houses = db.Table(
@@ -15,7 +19,7 @@ class Traveler(db.Model):
     userName = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), unique=False, nullable=False)
-    role = db.Column(db.String(20), unique=False, nullable=True, default='Traveler')
+    role = db.Column(db.Enum(TravelerRole, name="traveler_role"), nullable=False)
     
     favorite_houses = db.relationship('House', secondary=favorite_houses)
     reservations = db.relationship('Reservation', back_populates='traveler')
