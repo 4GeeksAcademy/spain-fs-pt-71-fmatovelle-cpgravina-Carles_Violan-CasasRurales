@@ -54,7 +54,7 @@ export const Navbar = () => {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon">
-              <i class="fa-solid fa-bars"></i>
+              <i className="fa-solid fa-bars"></i>
             </span>
           </button>
           <div

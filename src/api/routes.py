@@ -35,7 +35,7 @@ def register_user():
     try:
         # Create a new Traveler instance
         hashed_password = generate_password_hash(body['password'])
-        new_traveler = Traveler(userName=body['userName'], email=body['email'], password=hashed_password)
+        new_traveler = Traveler(userName=body['userName'], email=body['email'], password=hashed_password, role="TRAVELER")
         db.session.add(new_traveler)
         db.session.commit()
 
