@@ -53,7 +53,9 @@ export const Navbar = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon">
+              <i class="fa-solid fa-bars"></i>
+            </span>
           </button>
           <div
             className="collapse navbar-collapse justify-content-end"
@@ -91,7 +93,10 @@ export const Navbar = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link className="dropdown-item" to="/traveler/favorites">
+                        <Link
+                          className="dropdown-item"
+                          to="/traveler/favorites"
+                        >
                           Favorites
                         </Link>
                       </li>
@@ -182,4 +187,3 @@ export const Navbar = () => {
     </div>
   );
 };
-
