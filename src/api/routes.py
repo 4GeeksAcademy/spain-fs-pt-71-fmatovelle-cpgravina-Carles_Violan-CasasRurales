@@ -1,6 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+import os
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, Traveler, House, Feedback
 from api.utils import generate_sitemap, APIException
@@ -35,7 +36,7 @@ def register_user():
     try:
         # Create a new Traveler instance
         hashed_password = generate_password_hash(body['password'])
-        new_traveler = Traveler(userName=body['userName'], email=body['email'], password=hashed_password, role="TRAVELER")
+        new_traveler = Traveler(userName=body['userName'], email=body['email'], password=hashed_password)
         db.session.add(new_traveler)
         db.session.commit()
 
@@ -43,6 +44,49 @@ def register_user():
     except IntegrityError:
         db.session.rollback()  
         return jsonify({"message": "An error occurred during registration"}), 500  
+    
+
+@api.route('/register/admin', methods=['POST'])
+def register_admin():
+    body = request.get_json()
+
+    # Ensure the request body is provided and contains necessary fields
+    if body is None:
+        raise APIException("You need to specify the request body as a JSON object", status_code=400)
+    if 'userName' not in body:
+        raise APIException('You need to specify the userName', status_code=400)
+    if 'email' not in body:
+        raise APIException('You need to specify the email', status_code=400)
+    if 'password' not in body:
+        raise APIException('You need to specify the password', status_code=400)
+
+    # Check for the Admin-Token in the headers
+    admin_token = request.headers.get('Admin-Token')
+    if not admin_token or admin_token != os.getenv('ADMIN_SECRET_TOKEN'):
+        raise APIException("Unauthorized to register as admin", status_code=403)
+
+    # Check if the email already exists
+    existing_traveler = Traveler.query.filter_by(email=body['email']).first()
+    if existing_traveler:
+        return jsonify({"message": "Email already in use"}), 409  
+
+    try:
+        # Create a new Traveler instance with role 'admin'
+        hashed_password = generate_password_hash(body['password'])
+        new_traveler = Traveler(
+            userName=body['userName'], 
+            email=body['email'], 
+            password=hashed_password, 
+            role='ADMIN'
+        )
+        db.session.add(new_traveler)
+        db.session.commit()
+
+        return jsonify({"message": "Admin user registered successfully"}), 201  
+    except IntegrityError:
+        db.session.rollback()  
+        return jsonify({"message": "An error occurred during registration"}), 500  
+
 
 # Autenticación de usuarios para obtener el token JWT
 
@@ -57,12 +101,17 @@ def login():
 
     if traveler is None or not check_password_hash(traveler.password, body['password']):
         return jsonify({"msg": "Bad username or password"}), 401
-    
-    if traveler is None or not check_password_hash(traveler.password, body['password']):
-        return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=traveler.id)
-    return jsonify(access_token=access_token), 200
+    
+    traveler_role = traveler.role.name.lower() if hasattr(traveler.role, 'name') else traveler.role
+
+    response_body = {
+        "access_token": access_token,
+        "role": traveler_role 
+    }
+
+    return jsonify(response_body), 200
 
 
 # ENDPOINT PROTEGIDO VIAJERO

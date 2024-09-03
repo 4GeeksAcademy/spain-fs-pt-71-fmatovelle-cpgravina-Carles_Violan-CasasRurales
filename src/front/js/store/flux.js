@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       message: null,
       token: null,
       currentUser: null,
+      adminContent: null,
     },
     
     actions: {
@@ -23,10 +24,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log("Response received:", res);
     
             if (res.status === 200) {
-                const { access_token } = res.data;
+                const { access_token, role } = res.data;
                 localStorage.setItem("accessToken", access_token);
                 await getActions().getCurrentUser();
-                navigate("/protected");
+    
+                if (role === 'admin') {
+                    // Redirect to the backend /admin URL
+                    window.location.href = `${process.env.BACKEND_URL}admin/`;
+                } else {
+                    navigate("/protected");
+                }
                 return true;
             } else {
                 console.log("Login failed with status", res.status);
@@ -43,7 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             return false;
         }
     },
-
+    
     getCurrentUser: async () => {
       const token = localStorage.getItem("accessToken");
       if (!token) {
