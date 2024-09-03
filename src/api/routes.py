@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Traveler, House, Feedback
+from api.models import db, Traveler, House, Feedback, Booking
 from api.utils import generate_sitemap, APIException
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
@@ -237,6 +237,9 @@ def delete_house(id):
     
 #     return jsonify(house.serialize_details()), 200
 
+
+# ENDPOINT SUBMIT-FEEDBACK
+
 @api.route('/submit-feedback', methods=['POST'])
 def submit_feedback():
     data = request.json
@@ -250,6 +253,35 @@ def submit_feedback():
     db.session.commit()
     return jsonify({"message": "Feedback submitted successfully!"}), 201
 
+
+# ENDPOINT PROTEGIDO CHECKOUT
+
+@api.route('/checkout', methods=['POST'])
+@jwt_required()
+def create_booking():
+    current_traveler_id = get_jwt_identity()  # Get user ID from JWT token
+    body = request.get_json()
+
+    # Validate request body
+    if 'house_id' not in body or 'check_in_date' not in body or 'check_out_date' not in body or 'total_price' not in body:
+        return jsonify({"msg": "Missing fields in request body"}), 400
+
+    # Create a new booking
+    try:
+        new_booking = Booking(
+            traveler_id=current_traveler_id,
+            house_id=body['house_id'],
+            check_in_date=datetime.strptime(body['check_in_date'], '%Y-%m-%d'),
+            check_out_date=datetime.strptime(body['check_out_date'], '%Y-%m-%d'),
+            total_price=body['total_price'],
+            status='pending'
+        )
+        db.session.add(new_booking)
+        db.session.commit()
+        return jsonify({"msg": "Booking created successfully", "booking": new_booking.serialize()}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msg": "An error occurred while creating the booking"}), 500
 
 
 
