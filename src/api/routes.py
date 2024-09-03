@@ -77,7 +77,7 @@ def register_admin():
             userName=body['userName'], 
             email=body['email'], 
             password=hashed_password, 
-            role='ADMIN'
+            role='admin'
         )
         db.session.add(new_traveler)
         db.session.commit()
