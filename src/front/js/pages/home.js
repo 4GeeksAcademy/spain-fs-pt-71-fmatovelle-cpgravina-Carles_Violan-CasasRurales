@@ -103,11 +103,14 @@ export const Home = () => {
       {/* cards */}
 
 	  <div>
+    
 		<h1 className="ms-5">Experience the beauty of rural life</h1>
-		{/* cards */}
-    <div className="container m-5 d-flex">
-      {store.houses.map((house, index) => (
-        <div key={index} className="card rounded mb-4 me-5" style={{ width: "18rem" }}>
+{/* cards */}
+<div className="container">
+  <div className="row">
+    {store.houses.map((house, index) => (
+      <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-4">
+        <div className="card rounded">
           <div id={`carouselExample${index}`} className="carousel slide">
             <div className="carousel-inner">
               {house.image1 && (
@@ -159,21 +162,19 @@ export const Home = () => {
             <h5 className="card-title">{house.name}</h5>
             <p className="card-text">{house.address}</p>
             <p className="card-text">Type: {house.type}</p>
-        
           </div>
           
-          {/* <Link to="/single/" type="button" class="btn btn-success">Info</Link> */}
           <Link to={`/single/${house.id}`} className="btn btn-success">
-                Info
-              </Link>
-            
+            Info
+          </Link>
         </div>
-        
-      ))}
-    </div>
-    
-	  {/* end of cards */}
-	  </div>
-    </div>
+      </div>
+    ))}
+  </div>
+  {/* end of cards */}
+</div>
+</div>
+</div>
+   
   );
 };
