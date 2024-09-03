@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import logo from "../../img/logo.jpeg";
 
 export const Login = () => {
   const { actions } = useContext(Context);
@@ -10,7 +11,14 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    
+    if (!email.includes("@")) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     const success = await actions.login(userName, email, password, navigate);
     if (!success) {
       alert("Login failed, please try again.");
@@ -18,40 +26,65 @@ export const Login = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <h2 className="card-title text-center">Login</h2>
-              <input
-                type="text"
-                placeholder="Username"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                className="form-control my-2"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="form-control my-2"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="form-control my-2"
-              />
-              <button className="btn btn-primary" onClick={handleLogin}>
-                Login
-              </button>
-            </div>
-          </div>
+    <div className="form-signin w-100 m-auto mt-5 pt-5">
+      <form>
+        <img
+          className="mb-4"
+          src={logo}
+          alt="logo"
+          style={{ width: "72px", height: "72px" }}
+        />
+        <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+        <div className="form-floating">
+          <input
+            type="text"
+            className="form-control"
+            id="floatingInput1"
+            placeholder="name@example.com"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <label htmlFor="floatingInput">Username</label>
         </div>
-      </div>
+        <div className="form-floating">
+          <input
+            type="email"
+            className="form-control"
+            id="floatingInput2"
+            placeholder="name@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label htmlFor="floatingInput">Email address</label>
+        </div>
+        <div className="form-floating">
+          <input
+            type="password"
+            className="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <label htmlFor="floatingPassword">Password</label>
+        </div>
+
+        <div className="form-check text-start my-3">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value="remember-me"
+            id="flexCheckDefault"
+          />
+          <label className="form-check-label" htmlFor="flexCheckDefault">
+            Remember me
+          </label>
+        </div>
+        <button className="btn w-100 py-2 user-button" type="submit"  onClick={handleLogin}>
+          Sign in
+        </button>
+        <p className="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
+      </form>
     </div>
   );
 };
