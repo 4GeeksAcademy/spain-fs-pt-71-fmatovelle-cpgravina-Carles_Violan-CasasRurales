@@ -92,28 +92,20 @@ def register_admin():
 
 
 # Autenticación de usuarios para obtener el token JWT
-
 @api.route('/login', methods=['POST'])
 def login():
     body = request.get_json()
-
     if 'userName' not in body or 'password' not in body:
         return jsonify({"msg": "You need to specify the userName and password"}), 400
-
     traveler = Traveler.query.filter_by(userName=body['userName']).first()
-
     if traveler is None or not check_password_hash(traveler.password, body['password']):
         return jsonify({"msg": "Bad username or password"}), 401
-
     access_token = create_access_token(identity=traveler.id)
-    
     traveler_role = traveler.role.name.lower() if hasattr(traveler.role, 'name') else traveler.role
-
     response_body = {
         "access_token": access_token,
         "role": traveler_role 
     }
-
     return jsonify(response_body), 200
 
 
