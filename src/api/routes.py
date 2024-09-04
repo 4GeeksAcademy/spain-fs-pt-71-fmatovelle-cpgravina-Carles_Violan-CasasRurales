@@ -255,6 +255,149 @@ def submit_feedback():
     db.session.commit()
     return jsonify({"message": "Feedback submitted successfully!"}), 201
 
+# # ENDPOINT PROTEGIDO CREATE RESERVATION
+
+# @api.route('/reservations', methods=['POST'])
+# @jwt_required()
+# def create_reservation():
+#     body = request.get_json()
+#     current_user_id = get_jwt_identity()
+
+#     # Extract and validate input data
+#     house_id = body.get('house_id')
+#     start_date = body.get('start_date')
+#     end_date = body.get('end_date')
+
+#     if not house_id or not start_date or not end_date:
+#         return jsonify({"msg": "Missing required data"}), 400
+
+#     # Check house availability
+#     existing_reservations = Reservation.query.filter(
+#         Reservation.house_id == house_id,
+#         Reservation.end_date >= start_date,
+#         Reservation.start_date <= end_date
+#     ).all()
+
+#     if existing_reservations:
+#         return jsonify({"msg": "House is not available for the selected dates"}), 400
+
+#     # Create new reservation
+#     new_reservation = Reservation(
+#         traveler_id=current_user_id,
+#         house_id=house_id,
+#         start_date=start_date,
+#         end_date=end_date,
+#         status='Pending'  # Default status
+#     )
+#     db.session.add(new_reservation)
+#     db.session.commit()
+
+#     return jsonify(new_reservation.serialize()), 201
+
+
+# # ENDPOINT PROTEGIDO VIEW RESERVATION
+
+# @api.route('/reservations', methods=['GET'])
+# @jwt_required()
+# def get_reservations():
+#     current_user_id = get_jwt_identity()
+    
+#     # Retrieve reservations for the logged-in user
+#     reservations = Reservation.query.filter_by(traveler_id=current_user_id).all()
+#     reservations_list = [reservation.serialize() for reservation in reservations]
+
+#     return jsonify(reservations_list), 200
+
+
+# # ENDPOINT PROTEGIDO UPDATE RESERVATIONS
+
+# @api.route('/reservations/<int:id>', methods=['PUT'])
+# @jwt_required()
+# def update_reservation(id):
+#     body = request.get_json()
+#     current_user_id = get_jwt_identity()
+
+#     # Retrieve reservation by ID
+#     reservation = Reservation.query.get(id)
+#     if not reservation or reservation.traveler_id != current_user_id:
+#         return jsonify({"msg": "Reservation not found or unauthorized"}), 404
+
+#     # Update reservation details
+#     reservation.start_date = body.get('start_date', reservation.start_date)
+#     reservation.end_date = body.get('end_date', reservation.end_date)
+#     reservation.status = body.get('status', reservation.status)
+
+#     db.session.commit()
+
+#     return jsonify(reservation.serialize()), 200
+
+
+# # ENDPOINT PROTEGIDO CANCEL RESERVATION
+
+# @api.route('/reservations/<int:id>', methods=['DELETE'])
+# @jwt_required()
+# def cancel_reservation(id):
+#     current_user_id = get_jwt_identity()
+
+#     # Retrieve reservation by ID
+#     reservation = Reservation.query.get(id)
+#     if not reservation or reservation.traveler_id != current_user_id:
+#         return jsonify({"msg": "Reservation not found or unauthorized"}), 404
+
+#     # Cancel the reservation
+#     reservation.status = 'Canceled'
+#     db.session.commit()
+
+#     return jsonify({"msg": "Reservation canceled successfully"}), 200
+
+
+# ENDPOINT PROTEGIDO CHECKOUT
+
+@api.route('/checkout', methods=['POST'])
+@jwt_required()
+def checkout():
+    """
+    Endpoint to finalize a reservation by processing a payment and confirming it.
+    """
+    body = request.get_json()
+    current_traveler_id = get_jwt_identity()  # Get the ID of the logged-in user
+
+    # Validate request data
+    reservation_id = body.get('reservation_id')
+    payment_details = body.get('payment_details')  # Example: payment method, card token, etc.
+
+    if not reservation_id or not payment_details:
+        return jsonify({"msg": "Missing reservation ID or payment details"}), 400
+
+    # Retrieve reservation and validate ownership
+    reservation = Reservation.query.filter_by(id=reservation_id, traveler_id=current_traveler_id).first()
+    if not reservation:
+        return jsonify({"msg": "Reservation not found or unauthorized"}), 404
+
+    # Check if the reservation is already confirmed
+    if reservation.status == 'Confirmed':
+        return jsonify({"msg": "Reservation is already confirmed"}), 400
+
+    # Payment processing logic (this is a mock example)
+    payment_successful = process_payment(payment_details)  # Replace with actual payment integration logic
+
+    if not payment_successful:
+        return jsonify({"msg": "Payment failed"}), 402  # 402 Payment Required is an appropriate status code here
+
+    # Update reservation status to confirmed if payment is successful
+    reservation.status = 'Confirmed'
+    db.session.commit()
+
+    return jsonify({"msg": "Checkout successful, reservation confirmed", "reservation": reservation.serialize()}), 200
+
+def process_payment(payment_details):
+    """
+    Mock function to process payment. Replace this with real payment gateway integration.
+    """
+    # Perform payment gateway integration here (e.g., Stripe, PayPal, etc.)
+    # For now, we'll just simulate a successful payment.
+    return True  # Simulating successful payment
+
 
 
 
