@@ -10,10 +10,9 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     
     actions: {
-      login: async (userName, email, password, navigate) => {
+      login: async (userName, password, navigate) => {
         const bodyData = {
             userName,
-            email,
             password,
         };
         try {

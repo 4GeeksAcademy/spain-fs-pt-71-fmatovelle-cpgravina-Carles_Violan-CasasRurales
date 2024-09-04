@@ -5,7 +5,6 @@ import logo from "../../img/logo.jpeg";
 
 export const Login = () => {
   const { actions } = useContext(Context);
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
 
@@ -14,12 +13,7 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     
-    if (!email.includes("@")) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    const success = await actions.login(userName, email, password, navigate);
+    const success = await actions.login(userName, password, navigate);
     if (!success) {
       alert("Login failed, please try again.");
     }
@@ -45,17 +39,6 @@ export const Login = () => {
             onChange={(e) => setUserName(e.target.value)}
           />
           <label htmlFor="floatingInput">Username</label>
-        </div>
-        <div className="form-floating">
-          <input
-            type="email"
-            className="form-control"
-            id="floatingInput2"
-            placeholder="name@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label htmlFor="floatingInput">Email address</label>
         </div>
         <div className="form-floating">
           <input

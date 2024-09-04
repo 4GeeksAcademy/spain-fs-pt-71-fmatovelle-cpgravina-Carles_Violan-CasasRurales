@@ -97,10 +97,10 @@ def register_admin():
 def login():
     body = request.get_json()
 
-    if 'email' not in body or 'password' not in body:
-        return jsonify({"msg": "You need to specify the email and password"}), 400
+    if 'userName' not in body or 'password' not in body:
+        return jsonify({"msg": "You need to specify the userName and password"}), 400
 
-    traveler = Traveler.query.filter_by(email=body['email']).first()
+    traveler = Traveler.query.filter_by(userName=body['userName']).first()
 
     if traveler is None or not check_password_hash(traveler.password, body['password']):
         return jsonify({"msg": "Bad username or password"}), 401
