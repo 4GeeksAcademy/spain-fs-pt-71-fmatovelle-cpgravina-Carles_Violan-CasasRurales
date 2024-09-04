@@ -1,12 +1,12 @@
-
-# import click
+from werkzeug.security import generate_password_hash
 from api.models import db, TravelerRole, Traveler, House, HouseFeatures, Reservation, Feedback
 
 def build_test_user(user_name, role=TravelerRole.TRAVELER):
+    hashed_password = generate_password_hash("12345")
     user = Traveler()
     user.userName = user_name
     user.email = str(user_name) + "@test.com"
-    user.password = "12345"
+    user.password = hashed_password
     user.role = role
     return user
 
@@ -348,10 +348,10 @@ def setup_commands(app):
     @app.cli.command("insert-test-data")
     def insert_test_data():
         print("\n\n--- Creating test data | START ---")
-        #insert_test_travelers()
-        #insert_test_houses()
+        insert_test_travelers()
+        insert_test_houses()
         insert_test_housesFeatures() 
-        #insert_test_reservations()
-        #insert_test_feedback()
+        insert_test_reservations()
+        insert_test_feedback()
         print("--- Creating test data | END ---\n\n")
         pass
