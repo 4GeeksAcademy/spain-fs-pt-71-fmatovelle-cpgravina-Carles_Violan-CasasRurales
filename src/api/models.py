@@ -38,6 +38,7 @@ class House(db.Model):
     name = db.Column(db.String(120), unique=True, nullable=False)
     address = db.Column(db.String(120), unique=True, nullable=False)
     type = db.Column(db.String(200), unique=False, nullable=False)
+    nightly_rate = db.Column(db.Float, nullable=False)    
     
     # Campos para almacenar las URLs de las imágenes
     image1 = db.Column(db.String(250), unique=False, nullable=True)
@@ -55,6 +56,7 @@ class House(db.Model):
             "name": self.name,
             "address": self.address,
             "type": self.type,
+            "nightly_rate": self.nightly_rate,
             "image1": self.image1,
             "image2": self.image2,
             "image3": self.image3,

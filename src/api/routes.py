@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Traveler, House, Feedback
+from api.models import db, Traveler, House, Feedback, Reservation
 from api.utils import generate_sitemap, APIException
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
@@ -14,7 +14,8 @@ api = Flask(__name__)
 api = Blueprint('api', __name__)
 
 
-# ENDPOINT REGISTRO VIAJERO
+# ENDPOINT REGISTRO TRAVELER
+
 @api.route('/register', methods=['POST'])
 def register_user():
     body = request.get_json()
@@ -45,6 +46,8 @@ def register_user():
         db.session.rollback()  
         return jsonify({"message": "An error occurred during registration"}), 500  
     
+
+# ENDPOINT REGISTRO ADMIN
 
 @api.route('/register/admin', methods=['POST'])
 def register_admin():
@@ -114,7 +117,7 @@ def login():
     return jsonify(response_body), 200
 
 
-# ENDPOINT PROTEGIDO VIAJERO
+# ENDPOINT PROTEGIDO TRAVELER
 
 @api.route('/traveler/profile', methods=['GET'])
 @jwt_required()
@@ -138,8 +141,8 @@ def get_traveler_profile():
     return jsonify(profile)
 
 
-
 # ENDPOINT CREAR CASAS RURALES
+
 @api.route('/houses', methods=['POST'])
 @jwt_required()
 def create_house():
@@ -163,7 +166,6 @@ def create_house():
     return jsonify({"msg": "House created successfully", "house": new_house.serialize()}), 201
 
 
-
 # ENDPOINT MOSTRAR CASAS RURALES DISPONIBLES
 
 @api.route('/houses', methods=['GET'])
@@ -183,6 +185,7 @@ def get_house(id):
         return jsonify({"msg": "House not found"}), 404
 
     return jsonify(house.serialize()), 200
+
 
 # ENDPOINT PARA ACTUALIZAR/EDITAR DATOS DE CASAS RURALES 
 
@@ -225,7 +228,6 @@ def delete_house(id):
     return jsonify({"msg": "House deleted successfully"}), 200
 
 
-
 # ENDPOINT PARA VER DETTALES ADICIONALES/ INFORMACION SENSIBLE: DESCRIPTION, PPN, AVAILABILITY, CONTACT INFO, SPECIFIC ADDRESS. SE NECESITARIA AGREGAR DATOS EN EL MODELO. 
 
 # @api.route('/houses/<int:id>/details', methods=['GET'])
@@ -236,6 +238,9 @@ def delete_house(id):
 #         return jsonify({"msg": "House not found"}), 404
     
 #     return jsonify(house.serialize_details()), 200
+
+
+# ENDPOINT SUBMIT-FEEDBACK
 
 @api.route('/submit-feedback', methods=['POST'])
 def submit_feedback():
