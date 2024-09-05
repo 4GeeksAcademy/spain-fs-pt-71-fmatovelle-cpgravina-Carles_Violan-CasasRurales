@@ -27,8 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             localStorage.setItem("accessToken", access_token);
             await getActions().getCurrentUser();
 
-            if (role === "admin") {
-              // Redirect to the backend /admin URL
+            if (role === "ADMIN") {
               window.location.href = `${process.env.BACKEND_URL}/admin/`;
             } else {
               navigate("/protected");
