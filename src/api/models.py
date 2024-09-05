@@ -48,7 +48,7 @@ class House(db.Model):
 
     reservations = db.relationship('Reservation', back_populates='house')
     # Relación con HouseFeatures
-    features = db.relationship('HouseFeatures', uselist=False, back_populates='house')
+    features = db.relationship('HouseFeatures', uselist=False, back_populates='house', cascade='all, delete-orphan')
 
     def serialize(self):
         return {
