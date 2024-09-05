@@ -19,9 +19,6 @@ export const Navbar = () => {
 
   const handleLogout = async () => {
     const success = await actions.logout(navigate);
-    if (!success) {
-      alert("Logout failed, please try again.");
-    }
   };
 
   const handleSearch = () => {
@@ -109,13 +106,12 @@ export const Navbar = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link
+                        <span
                           className="dropdown-item border-top border-danger"
-                          to="#"
-                          onClick={handleLogout}
+                          onClick={ () => {handleLogout()}}
                         >
                           Log out
-                        </Link>
+                        </span>
                       </li>
                     </>
                   ) : (

@@ -20,11 +20,12 @@ export const Home = () => {
   return (
     <div>
       {/* // Carousel */}
-
       <div
         id="carouselExampleIndicators"
         className="carousel slide my-3"
         style={{ width: "100%", height: "600px" }}
+        data-bs-ride="false"
+        data-bs-interval="false"
       >
         <div className="carousel-indicators">
           <button
@@ -53,7 +54,7 @@ export const Home = () => {
             <img
               src={carousel1}
               className="d-block w-100"
-              alt="..."
+              alt="image1"
               style={{ height: "600px", objectFit: "cover" }}
             />
           </div>
@@ -61,7 +62,7 @@ export const Home = () => {
             <img
               src={carousel2}
               className="d-block w-100"
-              alt="..."
+              alt="image2"
               style={{ height: "600px", objectFit: "cover" }}
             />
           </div>
@@ -69,7 +70,7 @@ export const Home = () => {
             <img
               src={carousel3}
               className="d-block w-100"
-              alt="..."
+              alt="image3"
               style={{ height: "600px", objectFit: "cover" }}
             />
           </div>
@@ -102,79 +103,104 @@ export const Home = () => {
 
       {/* cards */}
 
-	  <div>
-    
-		<h1 className="ms-5">Experience the beauty of rural life</h1>
-{/* cards */}
-<div className="container">
-  <div className="row">
-    {store.houses.map((house, index) => (
-      <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-4">
-        <div className="card rounded">
-          <div id={`carouselExample${index}`} className="carousel slide">
-            <div className="carousel-inner">
-              {house.image1 && (
-                <div className="carousel-item active">
-                  <img src={house.image1} className="d-block w-100" alt="House 1" />
-                </div>
-              )}
-              {house.image2 && (
-                <div className="carousel-item">
-                  <img src={house.image2} className="d-block w-100" alt="House 2" />
-                </div>
-              )}
-              {house.image3 && (
-                <div className="carousel-item">
-                  <img src={house.image3} className="d-block w-100" alt="House 3" />
-                </div>
-              )}
-              {house.image4 && (
-                <div className="carousel-item">
-                  <img src={house.image4} className="d-block w-100" alt="House 4" />
-                </div>
-              )}
-            </div>
-            {house.image1 && (
-              <>
-                <button
-                  className="carousel-control-prev"
-                  type="button"
-                  data-bs-target={`#carouselExample${index}`}
-                  data-bs-slide="prev"
-                >
-                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span className="visually-hidden">Previous</span>
-                </button>
-                <button
-                  className="carousel-control-next"
-                  type="button"
-                  data-bs-target={`#carouselExample${index}`}
-                  data-bs-slide="next"
-                >
-                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span className="visually-hidden">Next</span>
-                </button>
-              </>
-            )}
-          </div>
+      <div>
+        <h1 className="ms-5">Experience the beauty of rural life</h1>
+        {/* cards */}
+        <div className="container">
+          <div className="row">
+            {store.houses.map((house, index) => (
+              <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-4">
+                <div className="card rounded">
+                  <div
+                    id={`carouselExample${index}`}
+                    className="carousel slide"
+                    data-bs-ride="false"
+                    data-bs-interval="false"
+                  >
+                    <div className="carousel-inner">
+                      {house.image1 && (
+                        <div className="carousel-item active">
+                          <img
+                            src={house.image1}
+                            className="d-block w-100"
+                            alt="House 1"
+                          />
+                        </div>
+                      )}
+                      {house.image2 && (
+                        <div className="carousel-item">
+                          <img
+                            src={house.image2}
+                            className="d-block w-100"
+                            alt="House 2"
+                          />
+                        </div>
+                      )}
+                      {house.image3 && (
+                        <div className="carousel-item">
+                          <img
+                            src={house.image3}
+                            className="d-block w-100"
+                            alt="House 3"
+                          />
+                        </div>
+                      )}
+                      {house.image4 && (
+                        <div className="carousel-item">
+                          <img
+                            src={house.image4}
+                            className="d-block w-100"
+                            alt="House 4"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    {house.image1 && (
+                      <>
+                        <button
+                          className="carousel-control-prev"
+                          type="button"
+                          data-bs-target={`#carouselExample${index}`}
+                          data-bs-slide="prev"
+                        >
+                          <span
+                            className="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                          className="carousel-control-next"
+                          type="button"
+                          data-bs-target={`#carouselExample${index}`}
+                          data-bs-slide="next"
+                        >
+                          <span
+                            className="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span className="visually-hidden">Next</span>
+                        </button>
+                      </>
+                    )}
+                  </div>
 
-          <div className="card-body">
-            <h5 className="card-title">{house.name}</h5>
-            <p className="card-text">{house.address}</p>
-            <p className="card-text">Type: {house.type}</p>
+                  <div className="card-body">
+                    <h5 className="card-title">{house.name}</h5>
+                    <p className="card-text">{house.address}</p>
+                    <p className="card-text">Type: {house.type}</p>
+                  </div>
+
+                  <Link to={`/single/${house.id}`} className="btn search-button">
+                    Learn more
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
-          
-          <Link to={`/single/${house.id}`} className="btn btn-success">
-            Info
-          </Link>
+          {/* end of cards */}
         </div>
       </div>
-    ))}
-  </div>
-  {/* end of cards */}
-</div>
-</div>
-</div>
-   
+    </div>
   );
 };

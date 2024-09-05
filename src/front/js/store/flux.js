@@ -162,7 +162,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ currentUser: null });
           console.log("User logged out successfully");
 
-          // Confirm the navigate function is being called
           console.log("Navigating to home...");
           navigate("/");
           console.log("Navigation should have occurred");
