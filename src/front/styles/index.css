@@ -10,7 +10,8 @@
 .globe-button,
 .user-button,
 .search-button,
-.search-icon {
+.search-icon,
+.static-btn {
     background-color: rgb(91, 173, 9);
 }
 
@@ -33,9 +34,6 @@ footer {
     color: gray;
   }
 
-.static-btn {
-    background-color:  rgb(91, 173, 9);
-}
 
 .bar {
     width: 700px;  
@@ -73,5 +71,12 @@ footer {
       flex-direction: column;
     }
   }
+
+  .react-datepicker {
+    width: 100%;
+    font-size: 1rem;
+  }
+  
+  
 
   

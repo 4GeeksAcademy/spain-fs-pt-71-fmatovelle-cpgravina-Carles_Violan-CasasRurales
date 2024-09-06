@@ -7,10 +7,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       currentUser: null,
       isLoggedIn: false,
       isLoadingUser: true,
+      bookingDetails: {
+        house: null,
+        startDate: null,
+        endDate: null,
+      },
     },
 
     actions: {
-      login: async (userName, password, navigate) => {
+      login: async (userName, password) => {
         const bodyData = {
           userName,
           password,
@@ -27,15 +32,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             localStorage.setItem("accessToken", access_token);
             await getActions().getCurrentUser();
 
-            if (role === "ADMIN") {
-              window.location.href = `${process.env.BACKEND_URL}/admin/`;
-            } else {
-              navigate("/protected");
-            }
-            return true;
+            return { success: true, role }; 
           } else {
-            console.log("Login failed with status", res.status);
-            return false;
+            return { success: false };
           }
         } catch (error) {
           if (error.response && error.response.status === 401) {
@@ -224,6 +223,26 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           return [];
         }
+      },
+
+      setBookingDetails: (house, startDate, endDate) => {
+        setStore({
+          bookingDetails: {
+            house,
+            startDate,
+            endDate,
+          },
+        });
+      },
+
+      clearBookingDetails: () => {
+        setStore({
+          bookingDetails: {
+            house: null,
+            startDate: null,
+            endDate: null,
+          },
+        });
       },
     },
   };

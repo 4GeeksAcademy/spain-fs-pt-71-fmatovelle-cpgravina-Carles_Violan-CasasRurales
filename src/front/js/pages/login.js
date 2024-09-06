@@ -13,8 +13,15 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const success = await actions.login(userName, password, navigate);
-    if (!success) {
+    const { success, role } = await actions.login(userName, password);
+
+    if (success) {
+      if (role === "ADMIN") {
+        window.location.href = `${process.env.BACKEND_URL}/admin/`;
+      } else {
+        navigate("/protected");
+      }
+    } else {
       alert("Login failed, please try again.");
     }
   };
