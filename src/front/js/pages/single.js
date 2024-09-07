@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { BookingForm } from "../component/bookingForm";
 
 export const Single = () => {
   const { store, actions } = useContext(Context);
@@ -84,10 +85,13 @@ export const Single = () => {
         <hr className="my-4" />
 
         <Link to="/">
-          <span className="btn btn-primary btn-lg" href="#" role="button">
+          <span className="btn btn-lg static-btn" href="#" role="button">
             Back home
           </span>
         </Link>
+      </div>
+      <div className="mt-5">
+        <BookingForm house={house} />
       </div>
     </div>
   );

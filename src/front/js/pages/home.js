@@ -106,7 +106,7 @@ export const Home = () => {
       <div>
         <h1 className="ms-5">Experience the beauty of rural life</h1>
         {/* cards */}
-        <div className="container">
+        <div className="container mt-5">
           <div className="row">
             {store.houses.map((house, index) => (
               <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-4">
