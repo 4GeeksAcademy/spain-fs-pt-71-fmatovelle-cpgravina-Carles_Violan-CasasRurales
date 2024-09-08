@@ -37,8 +37,10 @@ class House(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
     address = db.Column(db.String(120), unique=True, nullable=False)
-    type = db.Column(db.String(200), unique=False, nullable=False)
-    nightly_rate = db.Column(db.Float, unique=False, nullable=False)    
+    type = db.Column(db.String(200), unique=False, nullable=False)  
+    nightly_rate = db.Column(db.Float, unique=False, nullable=False)   
+    latitude = db.Column(db.String(120), unique=True, nullable=True)
+    longitude = db.Column(db.String(120), unique=True, nullable=True) 
     
     # Campos para almacenar las URLs de las imágenes
     image1 = db.Column(db.String(250), unique=False, nullable=True)
@@ -47,7 +49,6 @@ class House(db.Model):
     image4 = db.Column(db.String(250), unique=False, nullable=True)
 
     reservations = db.relationship('Reservation', back_populates='house')
-    # Relación con HouseFeatures
     features = db.relationship('HouseFeatures', uselist=False, back_populates='house', cascade='all, delete-orphan')
 
     def serialize(self):
@@ -57,12 +58,15 @@ class House(db.Model):
             "address": self.address,
             "type": self.type,
             "nightly_rate": self.nightly_rate,
+            "latitude": self.latitude,  
+            "longitude": self.longitude,  # Cambiado para que sea "longitude"
             "image1": self.image1,
             "image2": self.image2,
             "image3": self.image3,
             "image4": self.image4,
             "features": self.features.serialize() if self.features else None,
         }
+
 
 class HouseFeatures(db.Model):
     __tablename__ = 'house_features'

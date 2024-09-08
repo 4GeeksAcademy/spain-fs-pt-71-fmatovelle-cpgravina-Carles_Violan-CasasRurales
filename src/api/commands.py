@@ -36,6 +36,9 @@ def insert_test_houses():
     house1.address = "Calle de la Encina, 328792, Miraflores de la Sierra, Madrid Spain"
     house1.type = "cave house"
     house1.nightly_rate = "8"
+    house1.latitude = "40.942065"
+    house1.longitude = "-3.534001"
+
     house1.image1 = "https://i.imgur.com/g3swYoT.jpg"
     house1.image2 = "https://i.imgur.com/CC3b8UM.jpg"
     house1.image3 = "https://i.imgur.com/aes0DTL.jpg"
@@ -51,6 +54,8 @@ def insert_test_houses():
     house2.address = "Carrer de la Lluna, 23 08001 Barcelona, Spain"
     house2.type = "cottage"
     house2.nightly_rate = "7"
+    house2.latitude = "41.381555"
+    house2.longitude = "2.165592"
     house2.image1 = "https://i.imgur.com/XfqDcv7.jpg"
     house2.image2 = "https://i.imgur.com/L1Xa7Y0.jpg"
     house2.image3 = "https://i.imgur.com/eI5IyWd.jpg"
@@ -65,6 +70,8 @@ def insert_test_houses():
     house3.address = "Avinguda del Bosque, 9 08035, Barcelona Spain"
     house3.type = "farmHouse"
     house3.nightly_rate = "10"
+    house3.latitude = "41.407114"
+    house3.longitude = "21.461499"
     house3.image1 = "https://i.imgur.com/XqOzukN.jpg"
     house3.image2 = "https://i.imgur.com/L1Xa7Y0.jpg"
     house3.image3 = "https://i.imgur.com/eI5IyWd.jpg"
@@ -79,6 +86,8 @@ def insert_test_houses():
     house4.address = "Camino de los Olivos, 2528460, Los Molinos, Madrid Spain"
     house4.type = "cabin"
     house4.nightly_rate = "6"
+    house4.latitude = "40.083295"
+    house4.longitude = "-3.563956"
     house4.image1 = "https://i.imgur.com/eMQn23s.jpg"
     house4.image2 = "https://imgur.com/L6Ihg8J.jpg"
     house4.image3 = "https://i.imgur.com/gJozx6T.jpg"
@@ -93,6 +102,8 @@ def insert_test_houses():
     house5.address = "Camí de la Serra, 18 46167, Chulilla, Valencia Spain"
     house5.type = "house"
     house5.nightly_rate = "12"
+    house5.latitude = "39.655620"
+    house5.longitude = "-0.891943"
     house5.image1 = "https://i.imgur.com/HBF7Djo.jpg"
     house5.image2 = "https://i.imgur.com/jonzS53.jpg"
     house5.image3 = "https://i.imgur.com/2lL9DqR.jpg"
@@ -107,6 +118,8 @@ def insert_test_houses():
     house6.address = "123 Calle del Sol, Valencia, 46001, Spain"
     house6.type = "cabin"
     house6.nightly_rate = "11"
+    house6.latitude = "39.418303"
+    house6.longitude = "-0.391967"
     house6.image1 = "https://i.imgur.com/kxJ8JxZ.jpg"
     house6.image2 = "https://i.imgur.com/HlHWAVt.jpg"
     house6.image3 = "https://i.imgur.com/k8zFwSG.jpg"
@@ -118,9 +131,11 @@ def insert_test_houses():
 
     house7 = House()
     house7.name = "Charming barn"
-    house7.address = "Caserío La Esperanza Camino de los Robles, s/n 29650 Mijas Málaga, Spain"
+    house7.address = "La Esperanza Camino de los Robles, s/n 29650 Mijas Málaga, Spain"
     house7.type = "barn"
     house7.nightly_rate = "8"
+    house7.latitude = "36.596988"
+    house7.longitude = "-4.632343"
     house7.image1 = "https://i.imgur.com/5H9PM86.jpg"
     house7.image2 = "https://i.imgur.com/15Rrh0P.jpg"
     house7.image3 = "https://i.imgur.com/b1qTgVL.jpg"
@@ -136,6 +151,8 @@ def insert_test_houses():
     house8.address = "Calle de Gran Vía, 45 48011 Bilbao Spain"
     house8.type = "bungalow"
     house8.nightly_rate = "12"
+    house8.latitude = "43.263415"
+    house8.longitude = "-2.937114"
     house8.image1 = "https://i.imgur.com/CVFHvRj.jpg"
     house8.image2 = "https://i.imgur.com/Qht70Tf.jpg"
     house8.image3 = "https://i.imgur.com/xJpqrXg.jpg"
@@ -150,6 +167,8 @@ def insert_test_houses():
     house9.address = "Calle del Silencio 8 29005 Málaga Spain"
     house9.type = "house"
     house9.nightly_rate = "7"
+    house9.latitude = "36.719777"
+    house9.longitude = "-4.424009"
     house9.image1 = "https://i.imgur.com/MNOi5Gw.jpg"
     house9.image2 = "https://i.imgur.com/zspEI46.jpg"
     house9.image3 = "https://i.imgur.com/rHzBnxo.jpg"
@@ -166,6 +185,8 @@ def insert_test_houses():
     house10.address = "Calle del Tranquilo 12 50003 Zaragoza Spain"
     house10.type = "lodge"
     house10.nightly_rate = "8"
+    house10.latitude = "41.652940"
+    house10.longitude = "-0.880562"
     house10.image1 = "https://i.imgur.com/awwJ6Mn.jpg"
     house10.image2 = "https://i.imgur.com/k19jRXm.jpg"
     house10.image3 = "https://i.imgur.com/ddYV1z1.jpg"
@@ -351,7 +372,7 @@ def setup_commands(app):
         insert_test_travelers()
         insert_test_houses()
         insert_test_housesFeatures() 
-        insert_test_reservations()
-        insert_test_feedback()
+        #insert_test_reservations()
+       # insert_test_feedback()
         print("--- Creating test data | END ---\n\n")
         pass
