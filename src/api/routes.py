@@ -2,11 +2,11 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, make_response
 from api.models import db, Traveler, House, Feedback, Reservation
 from api.utils import generate_sitemap, APIException
 from sqlalchemy.exc import IntegrityError
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_jwt_cookies
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
@@ -47,50 +47,6 @@ def register_user():
         return jsonify({"message": "An error occurred during registration"}), 500  
     
 
-# ENDPOINT REGISTRO ADMIN
-
-@api.route('/register/admin', methods=['POST'])
-def register_admin():
-    body = request.get_json()
-
-    # Ensure the request body is provided and contains necessary fields
-    if body is None:
-        raise APIException("You need to specify the request body as a JSON object", status_code=400)
-    if 'userName' not in body:
-        raise APIException('You need to specify the userName', status_code=400)
-    if 'email' not in body:
-        raise APIException('You need to specify the email', status_code=400)
-    if 'password' not in body:
-        raise APIException('You need to specify the password', status_code=400)
-
-    # Check for the Admin-Token in the headers
-    admin_token = request.headers.get('Admin-Token')
-    if not admin_token or admin_token != os.getenv('ADMIN_SECRET_TOKEN'):
-        raise APIException("Unauthorized to register as admin", status_code=403)
-
-    # Check if the email already exists
-    existing_traveler = Traveler.query.filter_by(email=body['email']).first()
-    if existing_traveler:
-        return jsonify({"message": "Email already in use"}), 409  
-
-    try:
-        # Create a new Traveler instance with role 'admin'
-        hashed_password = generate_password_hash(body['password'])
-        new_traveler = Traveler(
-            userName=body['userName'], 
-            email=body['email'], 
-            password=hashed_password, 
-            role='admin'
-        )
-        db.session.add(new_traveler)
-        db.session.commit()
-
-        return jsonify({"message": "Admin user registered successfully"}), 201  
-    except IntegrityError:
-        db.session.rollback()  
-        return jsonify({"message": "An error occurred during registration"}), 500  
-
-
 # Autenticación de usuarios para obtener el token JWT
 @api.route('/login', methods=['POST'])
 def login():
@@ -106,7 +62,21 @@ def login():
         "access_token": access_token,
         "role": traveler_role 
     }
-    return jsonify(response_body), 200
+# Crear la respuesta utilizando make_response
+    response = make_response(jsonify(response_body), 200)
+
+    # Establecer la cookie si el rol es administrador
+    if traveler_role == 'ADMIN':
+        response.set_cookie('admin_token', access_token, httponly=True, samesite='Strict')
+
+    return response
+
+@api.route('/admin/logout', methods=['POST'])
+@jwt_required()
+def admin_logout():
+    response = jsonify({"msg": "Admin logged out successfully"})
+    unset_jwt_cookies(response)
+    return response
 
 
 # ENDPOINT PROTEGIDO TRAVELER
@@ -168,7 +138,7 @@ def create_house():
 # ENDPOINT MOSTRAR CASAS RURALES DISPONIBLES
 
 @api.route('/houses', methods=['GET'])
-def get_all_houses():
+def get_all_houses_by_id():
     houses = House.query.all()
     houses_list = [house.serialize() for house in houses]
     return jsonify(houses_list), 200
@@ -177,7 +147,7 @@ def get_all_houses():
 # ENDPOINT CASAS RURALES POR ID
 
 @api.route('/houses/<int:id>', methods=['GET'])
-def get_house(id):
+def get_house_by_id(id):
     house = House.query.get(id)
 
     if not house:
@@ -190,7 +160,7 @@ def get_house(id):
 
 @api.route('/houses/<int:id>', methods=['PUT'])
 @jwt_required()
-def update_house(id):
+def update_house_by_id(id):
     body = request.get_json()
 
     house = House.query.get(id)
@@ -223,7 +193,7 @@ def update_house(id):
 
 @api.route('/houses/<int:id>', methods=['DELETE'])
 @jwt_required()
-def delete_house(id):
+def delete_house_by_id(id):
     house = House.query.get(id)
 
     if not house:
