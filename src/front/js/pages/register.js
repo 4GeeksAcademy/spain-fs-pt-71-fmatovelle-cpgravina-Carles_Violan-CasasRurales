@@ -67,7 +67,7 @@ export const Register = () => {
           />
           <label htmlFor="floatingPassword">Password</label>
         </div>
-        <button className="btn w-100 py-2 user-button" type="submit"  onClick={handleRegister}>
+        <button className="btn w-100 py-2 search-button" type="submit"  onClick={handleRegister}>
           Sign up
         </button>
         <p className="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
