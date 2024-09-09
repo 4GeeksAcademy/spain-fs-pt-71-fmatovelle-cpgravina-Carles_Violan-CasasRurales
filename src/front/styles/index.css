@@ -2,81 +2,63 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 
-.brand-name {
-    color: rgb(91, 173, 9);
-}
-
-
-.globe-button,
-.user-button,
 .search-button,
-.search-icon,
 .static-btn {
-    background-color: rgb(91, 173, 9);
+  background-color: rgb(91, 173, 9);
 }
 
 .form-control {
-    height: 5rem;
-    border-radius: 10px;
-    transition: .5s ease;
-  }
-
-.navbar-btn {
-    height: 5rem;
+  height: 5rem;
+  border-radius: 10px;
+  transition: 0.5s ease;
 }
 
 footer {
-    
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .nav-link {
-    color: gray;
-  }
-
+  color: gray;
+}
 
 .bar {
-    width: 700px;  
-    height: 70px;  
-  }
+  width: 700px;
+  height: 70px;
+}
 
-  .form-signin {
-    max-width: 330px;
-    padding: 1rem;
-  }
-  
-  .form-signin .form-floating:focus-within {
-    z-index: 2;
-  }
-  
-  .form-signin input[type="text"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
+.form-signin {
+  max-width: 330px;
+  padding: 1rem;
+}
 
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-radius: 0;
-  }
-  
-  .form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-  
-  @media (max-width: 875px) {
-    .bar {
-      flex-direction: column;
-    }
-  }
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
 
-  .react-datepicker {
-    width: 100%;
-    font-size: 1rem;
-  }
-  
-  
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
-  
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+@media (max-width: 875px) {
+  .bar {
+    flex-direction: column;
+  }
+}
+
+.react-datepicker {
+  width: 100%;
+  font-size: 1rem;
+}
