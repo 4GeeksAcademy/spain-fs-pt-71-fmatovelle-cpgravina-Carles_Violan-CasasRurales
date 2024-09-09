@@ -3,7 +3,8 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
-from flask_mail import Mail, Message
+from flask_mail import Message
+from src.app import app, mail
 from api.models import db, Traveler, House, Feedback, Reservation
 from api.utils import generate_sitemap, APIException
 from sqlalchemy.exc import IntegrityError
@@ -486,11 +487,11 @@ def prueba_mail():
         
         msg = Message(
             subject="Operación exitosa", 
-            sender="patzi2207@gmail.com",  
+            sender=app.config['MAIL_DEFAULT_SENDER'],
             recipients=[email_recipient]
         )
         
-        msg.body = "¡Este mail de prueba ha lelgado!"
+        msg.body = "¡Este mail de prueba ha llegado!"
         msg.html = "<p>¡Todo ha salido genial!</p>"
 
         mail.send(msg)
