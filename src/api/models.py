@@ -107,6 +107,7 @@ class Reservation(db.Model):
     end_date = db.Column(db.DateTime, nullable=False)
     status = db.Column(db.String(50), nullable=False, default='Pending')  # Pending, Confirmed, Canceled, etc.
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
+    total_price = db.Column(db.Float, nullable=False) 
 
     # Relaciones
     traveler = db.relationship('Traveler', back_populates='reservations')
