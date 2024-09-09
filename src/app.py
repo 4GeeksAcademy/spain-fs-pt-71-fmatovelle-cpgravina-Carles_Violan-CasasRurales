@@ -15,7 +15,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
-CORS(app)  # Esto habilitará CORS para todas las rutas
+CORS(app, supports_credentials=True)  # Esto habilitará CORS para todas las rutas
 
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
