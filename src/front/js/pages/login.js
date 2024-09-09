@@ -59,7 +59,7 @@ export const Login = () => {
           <label htmlFor="floatingPassword">Password</label>
         </div>
         <button
-          className="btn w-100 py-2 user-button"
+          className="btn w-100 py-2 search-button"
           type="submit"
           onClick={handleLogin}
         >
