@@ -13,19 +13,6 @@
   transition: 0.5s ease;
 }
 
-footer {
-  text-decoration: none;
-}
-
-.nav-link {
-  color: gray;
-}
-
-.bar {
-  width: 700px;
-  height: 70px;
-}
-
 .form-signin {
   max-width: 330px;
   padding: 1rem;
@@ -52,11 +39,6 @@ footer {
   border-top-right-radius: 0;
 }
 
-@media (max-width: 875px) {
-  .bar {
-    flex-direction: column;
-  }
-}
 
 .react-datepicker {
   width: 100%;

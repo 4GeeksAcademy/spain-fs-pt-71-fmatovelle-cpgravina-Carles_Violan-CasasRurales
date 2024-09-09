@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../img/logo.jpeg";
-import "../../../styles/home.css";
+import "./styles.css";
 
 export const Footer = () => (
   <footer>
-    <div className="row row-cols-1 row-cols-lg-3 py-5 justify-content-center border-top">
-      <div className="col mb-3"></div>
-      <div className="col mb-3">
+    <div className="container row row-cols-1 row-cols-md-1 row-cols-lg-3 py-5 m-auto border-top">
+      <div className="col mb-3 text-center">
         <h5>About us</h5>
         <ul className="nav flex-column">
           <li className="nav-item mb-2">
@@ -32,7 +31,7 @@ export const Footer = () => (
           </li>
         </ul>
       </div>
-      <div className="col mb-3">
+      <div className="col mb-3 text-center">
         <h5>Explore</h5>
         <ul className="nav flex-column">
           <li className="nav-item mb-2">
@@ -58,7 +57,7 @@ export const Footer = () => (
         </ul>
       </div>
 
-      <div className="col mb-3">
+      <div className="col mb-3 text-center">
         <h5>Help</h5>
         <ul className="nav flex-column">
           <li className="nav-item mb-2">
@@ -84,8 +83,9 @@ export const Footer = () => (
         </ul>
       </div>
     </div>
+
     <div className="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-      <div className="col-md-4 d-flex align-items-center">
+      <div className="col-md-4 d-flex align-items-center justify-content-center">
         <Link
           to="/"
           className="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1"
@@ -97,7 +97,7 @@ export const Footer = () => (
         </span>
       </div>
 
-      <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <ul className="nav col-md-4 justify-content-center list-unstyled d-flex">
         <li className="ms-3">
           <Link className="text-black" to="contact-us">
             <i className="fa-brands fa-twitter"></i>
