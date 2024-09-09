@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../img/logo.jpeg";
-import "../../styles/home.css";
+import logo from "../../../img/logo.jpeg";
+import "../../../styles/home.css";
 
 export const Footer = () => (
   <footer>
-    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 justify-content-center border-top">
+    <div className="row row-cols-1 row-cols-lg-3 py-5 justify-content-center border-top">
       <div className="col mb-3"></div>
       <div className="col mb-3">
         <h5>About us</h5>

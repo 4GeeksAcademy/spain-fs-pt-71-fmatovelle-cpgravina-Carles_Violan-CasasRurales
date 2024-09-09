@@ -12,7 +12,7 @@ import injectContext from "./store/appContext";
 
 
 import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
+import { Footer } from "./component/footer/index.js";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Protected } from "./pages/protected";
