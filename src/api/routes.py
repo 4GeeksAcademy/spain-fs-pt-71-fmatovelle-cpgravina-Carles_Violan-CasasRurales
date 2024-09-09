@@ -3,6 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
+from flask_mail import Mail, Message
 from api.models import db, Traveler, House, Feedback, Reservation
 from api.utils import generate_sitemap, APIException
 from sqlalchemy.exc import IntegrityError
@@ -430,10 +431,71 @@ def submit_feedback():
 #     # For now, we'll just simulate a successful payment.
 #     return True  # Simulating successful payment
 
+# ENDPOINT ENVIO EMAIL
+
+# @api.route('/send-confirmation-email', methods=['POST'])
+# @jwt_required()
+# def send_confirmation_email():
+#     body = request.get_json()
+
+#     # Extract data from the request
+#     traveler_id = body.get('traveler_id')
+#     house_id = body.get('house_id')
+#     start_date = body.get('start_date')
+#     end_date = body.get('end_date')
+
+#     # Validate request data
+#     if not traveler_id or not house_id or not start_date or not end_date:
+#         return jsonify({"msg": "Missing required data"}), 400
+
+#     # Retrieve the traveler and house details
+#     traveler = Traveler.query.get(traveler_id)
+#     house = House.query.get(house_id)
+
+#     if not traveler or not house:
+#         return jsonify({"msg": "Traveler or House not found"}), 404
+
+#     # Send confirmation email
+#     subject = "Reservation Confirmation"
+#     body = f"""
+#     Hi {traveler.userName},
+    
+#     Your reservation for {house.name} has been confirmed!
+#     - Check-in: {start_date}
+#     - Check-out: {end_date}
+
+#     We look forward to hosting you.
+
+#     Regards,
+#     Rural Experience Team
+#     """
+#     msg = Message(subject, recipients=[traveler.email])
+#     msg.body = body
+
+#     # Send email using Flask-Mail
+#     mail.send(msg)
+
+#     return jsonify({"msg": "Confirmation email sent successfully"}), 200
 
 
+@api.route('/pruebamail', methods=['POST'])
+def prueba_mail():
+    try:
+        data = request.json
+        email_recipient = data.get('email', 'recipient@example.com') 
+        
+        msg = Message(
+            subject="Operación exitosa", 
+            sender="patzi2207@gmail.com",  
+            recipients=[email_recipient]
+        )
+        
+        msg.body = "¡Este mail de prueba ha lelgado!"
+        msg.html = "<p>¡Todo ha salido genial!</p>"
 
+        mail.send(msg)
 
+        return jsonify({"message": "Correo enviado con éxito"}), 200
 
-
-
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

@@ -5,14 +5,16 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
+from flask_cors import CORS
+from flask_jwt_extended import JWTManager
+from flask_mail import Mail
+
 from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
-from flask import Flask
-from flask_cors import CORS
-from flask_jwt_extended import JWTManager
+
 
 app = Flask(__name__)
 CORS(app)  # Esto habilitará CORS para todas las rutas
@@ -39,6 +41,16 @@ MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
 jwt = JWTManager(app)
+
+# Email Configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME") 
+app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD") 
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv("MAIL_DEFAULT_SENDER") 
+
+mail = Mail(app)
 
 # add the admin
 setup_admin(app)

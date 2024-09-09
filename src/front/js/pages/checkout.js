@@ -34,6 +34,13 @@ export const Checkout = () => {
         <strong>End Date:</strong>{" "}
         {new Date(bookingDetails.endDate).toLocaleDateString()}
       </p>
+      <button
+        className="btn search-button btn-lg mb-5"
+        onClick=""
+        role="button"
+      >
+        Book this house
+      </button>
     </div>
   );
 };

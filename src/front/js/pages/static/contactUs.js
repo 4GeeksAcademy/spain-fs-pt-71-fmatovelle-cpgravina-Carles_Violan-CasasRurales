@@ -18,7 +18,7 @@ export const ContactUs = () => {
             Whether you need help with a booking, have a question about our properties, or want to provide feedback, our team is ready to assist you.
           </p>
           <p className="fw-light fs-5">
-            <strong>Email:</strong> <a href="mailto:support@ruralexperience.com">support@ruralexperience.com</a><br />
+            <strong>Email:</strong> <a href="mailto:support@ruralexperience.com">ruralexperiencewebsite@gmail.com</a><br />
             <strong>Phone:</strong> +1 (555) 123-4567<br />
             <strong>Address:</strong> 123 Country Lane, Farmville, Countryland, 45678
           </p>
