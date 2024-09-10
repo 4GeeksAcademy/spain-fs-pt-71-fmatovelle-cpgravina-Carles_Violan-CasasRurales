@@ -197,3 +197,131 @@ ul {
     min-width: auto;
   }
 }
+
+
+/* Confirm and Pay Button Styling */
+.confirm-pay-button {
+  background-color: rgb(91, 173, 9, 0.658); /* Green color for the confirm button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  transition: background-color 0.3s ease, transform 0.2s;
+  width: 100%;
+  display: block;
+}
+
+.confirm-pay-button:hover {
+  background-color: #4caf50; /* Hover effect for confirm button */
+  transform: scale(1.05);
+}
+
+/* Go to Home Button Styling */
+.home-button {
+  background-color: #333; /* Dark color for the home button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  display: block;
+}
+
+.home-button:hover {
+  background-color: #555; /* Slightly lighter color for hover effect */
+}
+
+
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Darker semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease; /* Smooth fade-in effect */
+}
+
+/* Modal Content Box */
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px; /* Softer rounded corners */
+  width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth pop-up effect */
+}
+
+/* Modal Header */
+.modal-content h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333; /* Darker text color for contrast */
+}
+
+/* Modal Text */
+.modal-content p {
+  font-size: 16px;
+  margin-bottom: 30px;
+  padding: 10px;
+  color: #555; /* Softer color for readability */
+}
+
+/* Modal Buttons */
+.confirm-button, .cancel-button {
+  padding: 12px 24px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px; /* More pronounced rounded corners */
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s; /* Add button hover and active state effects */
+}
+
+/* Confirm Button */
+.confirm-button {
+  background-color: rgb(91, 173, 9, 0.658); /* Blue color for confirmation */
+  color: #fff;
+}
+
+.confirm-button:hover {
+  background-color: #4caf50; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Cancel Button */
+.cancel-button {
+  background-color: #6c757d; /* Neutral grey color */
+  color: #fff;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268; /* Darker grey on hover */
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Modal Close Animation */
+.modal-overlay.hidden {
+  opacity: 0; /* Fade out */
+  pointer-events: none; /* Disable interaction when hidden */
+}
+
+.modal-content.hidden {
+  transform: scale(0.8); /* Scale down effect */
+  opacity: 0; /* Fade out */
+}
