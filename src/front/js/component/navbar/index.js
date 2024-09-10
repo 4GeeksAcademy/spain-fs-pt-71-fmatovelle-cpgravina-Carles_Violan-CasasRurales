@@ -86,7 +86,7 @@ export const Navbar = () => {
                       <li>
                         <Link
                           className="dropdown-item"
-                          to="/traveler/favorites"
+                          to="favorites"
                         >
                           Favorites
                         </Link>

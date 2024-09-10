@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { MainCarousel } from "../component/mainCarousel";
-import { HouseCard } from "../component/houseCards";
+import { HouseCard } from "../component/houseCard";
 import { LoadingSpinner } from "../component/loadingSpinner";
 import "../../styles/home.css";
 

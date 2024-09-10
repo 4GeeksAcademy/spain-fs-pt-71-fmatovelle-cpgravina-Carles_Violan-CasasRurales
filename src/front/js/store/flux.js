@@ -12,9 +12,41 @@ const getState = ({ getStore, getActions, setStore }) => {
         startDate: null,
         endDate: null,
       },
+      houses: [],
+      favorites: [],
     },
 
     actions: {
+     
+      addFavorite: (houseId) => {
+        const store = getStore();
+        const updatedFavorites = [...store.favorites, houseId];
+        setStore({ favorites: updatedFavorites });
+
+        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      },
+
+
+      removeFavorite: (houseId) => {
+        const store = getStore();
+        const updatedFavorites = store.favorites.filter(id => id !== houseId);
+        setStore({ favorites: updatedFavorites });
+
+        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      },
+
+      isFavorite: (houseId) => {
+        const store = getStore();
+        return store.favorites.includes(houseId);
+      },
+
+      loadFavorites: () => {
+        const storedFavorites = localStorage.getItem("favorites");
+        if (storedFavorites) {
+          setStore({ favorites: JSON.parse(storedFavorites) });
+        }
+      },
+
       login: async (userName, password) => {
         const bodyData = {
           userName,
