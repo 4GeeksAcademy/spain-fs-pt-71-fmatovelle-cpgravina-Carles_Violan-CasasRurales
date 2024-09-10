@@ -19,7 +19,7 @@ export const Login = () => {
       if (role === "ADMIN") {
         window.location.href = `${process.env.BACKEND_URL}/admin/`;
       } else {
-        navigate("/");
+        navigate("/protected");
       }
     } else {
       alert("Login failed, please try again.");

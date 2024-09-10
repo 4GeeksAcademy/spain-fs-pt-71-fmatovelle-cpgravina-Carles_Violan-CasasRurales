@@ -2,13 +2,16 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookingsCalendar } from "./bookingsCalendar";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Modal } from "./Modal";
 
 export const BookingForm = ({ house }) => {
   const { actions } = useContext(Context);
   const [dates, setDates] = useState({ startDate: null, endDate: null });
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
   const navigate = useNavigate();
+ 
 
   const handleDateChange = (start, end) => {
     setDates({ startDate: start, endDate: end });
@@ -20,6 +23,10 @@ export const BookingForm = ({ house }) => {
       actions.setBookingDetails(house, dates.startDate, dates.endDate);
       navigate("/checkout");
     } else {
+      setModalTitle("Dates Required");
+      setModalMessage(
+        "Please select both a start and end date to proceed with your booking."
+      );
       setIsModalVisible(true);
     }
   };
@@ -42,45 +49,12 @@ export const BookingForm = ({ house }) => {
       </button>
 
       {/* Modal */}
-      {isModalVisible && (
-        <div
-          className="modal show"
-          tabIndex="-1"
-          role="dialog"
-          style={{ display: "block" }}
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Dates Required</h5>
-                <button
-                  type="button"
-                  className="close static-btn"
-                  onClick={closeModal}
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <p>
-                  Please select both a start and end date to proceed with your
-                  booking.
-                </p>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn static-btn"
-                  onClick={closeModal}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal
+        isVisible={isModalVisible}
+        onClose={closeModal}
+        title={modalTitle}
+        message={modalMessage}
+      />
     </div>
   );
 };
