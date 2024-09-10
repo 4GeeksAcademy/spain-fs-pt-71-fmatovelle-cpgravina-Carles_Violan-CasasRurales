@@ -19,7 +19,7 @@ export const Login = () => {
       if (role === "ADMIN") {
         window.location.href = `${process.env.BACKEND_URL}/admin/`;
       } else {
-        navigate("/");
+        navigate("/protected");
       }
     } else {
       alert("Login failed, please try again.");
@@ -59,7 +59,7 @@ export const Login = () => {
           <label htmlFor="floatingPassword">Password</label>
         </div>
         <button
-          className="btn w-100 py-2 user-button"
+          className="btn w-100 py-2 search-button"
           type="submit"
           onClick={handleLogin}
         >

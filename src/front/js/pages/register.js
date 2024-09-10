@@ -2,26 +2,42 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import logo from "../../img/logo.jpeg";
+import { Modal } from "../component/Modal";
 
 export const Register = () => {
   const { actions } = useContext(Context);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
-    e.preventDefault(); // Prevent the form from submitting
-    // Validate that the email contains an '@' symbol
+    e.preventDefault();
     if (!email.includes("@")) {
-      alert("Please enter a valid email address.");
+      setModalTitle("Incorrect email address");
+      setModalMessage("Please enter a valid email address.");
+      setIsModalVisible(true);
       return;
     }
-    
-    const success = await actions.register(userName, email, password, navigate);
-    if (!success) {
-      alert("Registration failed, please try again.");
+
+    const { success } = await actions.register(userName, email, password);
+
+    if (success) {
+      navigate("/login");
+    } else {
+      setModalTitle("An error has occured");
+      setModalMessage(
+        "An error has occured during registration. Please try again."
+      );
+      setIsModalVisible(true);
     }
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -67,11 +83,23 @@ export const Register = () => {
           />
           <label htmlFor="floatingPassword">Password</label>
         </div>
-        <button className="btn w-100 py-2 user-button" type="submit"  onClick={handleRegister}>
+        <button
+          className="btn w-100 py-2 search-button"
+          type="submit"
+          onClick={handleRegister}
+        >
           Sign up
         </button>
         <p className="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
       </form>
+
+      {/* Modal */}
+      <Modal
+        isVisible={isModalVisible}
+        onClose={closeModal}
+        title={modalTitle}
+        message={modalMessage}
+      />
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../img/logo.jpeg";
-import "../../styles/home.css";
+import logo from "../../../img/logo.jpeg";
+import "./styles.css";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
@@ -19,6 +19,9 @@ export const Navbar = () => {
 
   const handleLogout = async () => {
     const success = await actions.logout(navigate);
+    if (success) {
+      navigate("/");
+    }
   };
 
   const handleSearch = () => {
@@ -59,18 +62,9 @@ export const Navbar = () => {
             id="navbarToggler"
           >
             <div className="d-flex justify-content-end">
-              <button
-                type="button"
-                className="btn m-1 globe-button"
-                data-bs-toggle="modal"
-                data-bs-target="#createNewPostModal"
-                style={{ width: "70px", height: "auto" }}
-              >
-                <i className="fa-solid fa-globe"></i>
-              </button>
               <div className="dropdown m-1">
                 <button
-                  className="btn dropdown-toggle user-button"
+                  className="btn dropdown-toggle search-button"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -85,7 +79,7 @@ export const Navbar = () => {
                         Welcome, {store.currentUser.userName}
                       </p>
                       <li>
-                        <Link className="dropdown-item" to="/traveler/profile">
+                        <Link className="dropdown-item" to="/protected">
                           Profile
                         </Link>
                       </li>
@@ -108,7 +102,9 @@ export const Navbar = () => {
                       <li>
                         <span
                           className="dropdown-item border-top border-danger"
-                          onClick={ () => {handleLogout()}}
+                          onClick={() => {
+                            handleLogout();
+                          }}
                         >
                           Log out
                         </span>
@@ -117,10 +113,10 @@ export const Navbar = () => {
                   ) : (
                     <li>
                       <Link className="dropdown-item" to="/register">
-                        Register
+                        Sign up
                       </Link>
                       <Link className="dropdown-item" to="/login">
-                        Login
+                        Log in
                       </Link>
                     </li>
                   )}

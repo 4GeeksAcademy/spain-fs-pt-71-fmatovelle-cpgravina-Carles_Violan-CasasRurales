@@ -11,8 +11,8 @@ import { Checkout } from "./pages/checkout.js";
 import injectContext from "./store/appContext";
 
 
-import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
+import { Navbar } from "./component/navbar/index.js";
+import { Footer } from "./component/footer/index.js";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Protected } from "./pages/protected";
