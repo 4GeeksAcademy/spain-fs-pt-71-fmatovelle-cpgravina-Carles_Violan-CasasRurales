@@ -20,6 +20,7 @@ const PaymentSection = ({ selectedPayment, handlePaymentChange }) => {
             <p><strong>Iban Number:</strong> ES82 0081 0200 2700 0429 </p>
             <p><strong>Swift Code:</strong> BSABESBV</p>
             <p><strong>Recipient:</strong> Rural Experience</p>
+            <p><strong>*</strong> We will continue with reservation once payment transaction details is sent to support@ruralexperience.com</p>
           </div>
         )}
       </div>
