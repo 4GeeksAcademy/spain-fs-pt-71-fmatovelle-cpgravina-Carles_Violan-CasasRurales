@@ -29,6 +29,8 @@ import { Faqs } from "./pages/static/faqs.js";
 import { CancellationOptions } from "./pages/static/cancellationOptions.js";
 import { ContactUs } from "./pages/static/contactUs.js";
 import { Feedback } from "./pages/feedback.js";
+// import { ForgotPassword } from "./component/forgotpassword";
+
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -50,6 +52,7 @@ const Layout = () => {
             <Route element={<Feedback />} path="/feedback" />
             <Route element={<Checkout />} path="/checkout" />
             <Route element={<h1>Not found!</h1>} />
+            {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
 
             {/* static routes */}
             <Route element={<About />} path="/about" />
