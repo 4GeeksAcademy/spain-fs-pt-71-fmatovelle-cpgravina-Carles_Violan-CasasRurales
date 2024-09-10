@@ -4,7 +4,6 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_mail import Message
-from src.app import app, mail
 from api.models import db, Traveler, House, Feedback, Reservation
 from api.utils import generate_sitemap, APIException
 from sqlalchemy.exc import IntegrityError
