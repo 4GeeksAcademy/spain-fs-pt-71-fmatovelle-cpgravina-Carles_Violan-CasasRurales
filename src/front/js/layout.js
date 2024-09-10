@@ -6,7 +6,6 @@ import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
-import { Checkout } from "./pages/checkout.js";
 
 import injectContext from "./store/appContext";
 
@@ -16,6 +15,7 @@ import { Footer } from "./component/footer/index.js";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Protected } from "./pages/protected";
+import { Checkout } from './component/checkout/Checkout.js'
 
 //static pages
 import { About } from "./pages/static/about";
@@ -48,7 +48,7 @@ const Layout = () => {
             <Route element={<Register />} path="/register"  />          
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<Feedback />} path="/feedback" />
-            <Route element={<Checkout />} path="/checkout" />
+            <Route element={<Checkout />} path="/Checkout" />
             <Route element={<h1>Not found!</h1>} />
 
             {/* static routes */}

@@ -21,7 +21,7 @@ export const BookingForm = ({ house }) => {
     e.preventDefault();
     if (dates.startDate && dates.endDate) {
       actions.setBookingDetails(house, dates.startDate, dates.endDate);
-      navigate("/checkout");
+      navigate("/Checkout");
     } else {
       setModalTitle("Dates Required");
       setModalMessage(
