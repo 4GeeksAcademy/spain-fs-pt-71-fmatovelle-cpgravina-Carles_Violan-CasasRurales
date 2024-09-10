@@ -4,8 +4,8 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
+
+import { Single } from "./pages/singlehouse.js";
 import { Checkout } from "./pages/checkout.js";
 
 import injectContext from "./store/appContext";
@@ -44,7 +44,7 @@ const Layout = () => {
           <Navbar />
           <Routes>
             <Route element={<Home />} path="/" />
-            <Route element={<Demo />} path="/demo" />
+           
             <Route element={<Login />} path="/login" />
             <Route element={<Profile />} path="/profile" />
             <Route element={<Register />} path="/register"  />          
