@@ -19,6 +19,9 @@ export const Navbar = () => {
 
   const handleLogout = async () => {
     const success = await actions.logout(navigate);
+    if (success) {
+      navigate("/");
+    }
   };
 
   const handleSearch = () => {
@@ -110,10 +113,10 @@ export const Navbar = () => {
                   ) : (
                     <li>
                       <Link className="dropdown-item" to="/register">
-                        Register
+                        Sign up
                       </Link>
                       <Link className="dropdown-item" to="/login">
-                        Login
+                        Log in
                       </Link>
                     </li>
                   )}
