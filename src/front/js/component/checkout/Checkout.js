@@ -1,13 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import { Context } from "../../store/appContext"; 
 import TripSummary from "./TripSummary"; 
 import PaymentSection from "./PaymentSection"; 
 import AdditionalInfo from "./AdditionalInfo"; 
 import PriceDetails from "./PriceDetails"; 
+import Modal from "./Modal";
 import './styles/Checkout.css'; 
 
 export const Checkout = () => {
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate(); // Initialize navigate for redirection
   
   // State for booking details, initialized from store or localStorage
   const [bookingDetails, setBookingDetails] = useState(() => {
@@ -26,6 +29,7 @@ export const Checkout = () => {
 
   const [selectedPayment, setSelectedPayment] = useState('Transfer'); 
   const [isEditing, setIsEditing] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
 
   // Load booking details from localStorage when the component mounts
   useEffect(() => {
@@ -70,6 +74,21 @@ export const Checkout = () => {
   const cleaningFee = 11.05; 
   const serviceFee = 31.41; 
 
+  const handleConfirmPayment = () => {
+    console.log("Payment confirmed!");
+    actions.clearBookingDetails(); 
+    localStorage.removeItem('house');
+    localStorage.removeItem('guests');
+    localStorage.removeItem('startDate');
+    localStorage.removeItem('endDate');
+    setIsModalVisible(false); // Close modal
+    navigate("/"); // Redirect to home
+  };
+
+  const handleCancelModal = () => {
+    setIsModalVisible(false); // Close modal
+  };
+
   if (!bookingDetails.house) {
     console.log('No booking details available:', bookingDetails);
     return <div>No booking details available.</div>;
@@ -97,14 +116,7 @@ export const Checkout = () => {
         <AdditionalInfo />
 
         <button
-          onClick={() => {
-            console.log("Payment confirmed!");
-            actions.clearBookingDetails(); 
-            localStorage.removeItem('house');
-            localStorage.removeItem('guests');
-            localStorage.removeItem('startDate');
-            localStorage.removeItem('endDate');
-          }}
+          onClick={() => setIsModalVisible(true)}
           className="confirm-pay-button"
         >
           Confirm and Pay
@@ -120,6 +132,11 @@ export const Checkout = () => {
           guests={bookingDetails.guests}
         />
       </div>
+      <Modal 
+        isVisible={isModalVisible} 
+        onClose={handleCancelModal} 
+        onConfirm={handleConfirmPayment} 
+      />
     </div>
   );
 };
