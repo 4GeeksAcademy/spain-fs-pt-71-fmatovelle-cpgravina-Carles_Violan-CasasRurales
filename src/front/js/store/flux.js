@@ -188,6 +188,32 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+  // Acción para obtener las reservas del usuario
+           getUserReservations: async () => {
+            const token = localStorage.getItem("accessToken");
+            if (!token) {
+              console.log("No token found for reservations");
+              return [];
+            }
+            try {
+              const res = await axios.get(`${process.env.BACKEND_URL}/api/reservations`, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+    
+              if (res.status === 200) {
+                setStore({ reservations: res.data });
+                return res.data;
+              } else {
+                console.log("Failed to fetch reservations, status:", res.status);
+                return [];
+              }
+            } catch (error) {
+              console.log("Error fetching reservations:", error.response ? error.response.data : error.message);
+              return [];
+            }
+          },
       getAllHouses: async () => {
         try {
           const response = await axios.get(

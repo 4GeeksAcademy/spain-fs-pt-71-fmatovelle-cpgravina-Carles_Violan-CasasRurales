@@ -107,6 +107,7 @@ class Reservation(db.Model):
     end_date = db.Column(db.DateTime, nullable=False)
     status = db.Column(db.String(50), nullable=False, default='Pending')  # Pending, Confirmed, Canceled, etc.
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
+    total_price = db.Column(db.Float, nullable=False) 
 
     # Relaciones
     traveler = db.relationship('Traveler', back_populates='reservations')
@@ -115,15 +116,20 @@ class Reservation(db.Model):
     def __repr__(self):
         return f'<Reservation Traveler: {self.traveler_id}, House: {self.house_id}, From: {self.start_date}, To: {self.end_date}>'
 
+
     def serialize(self):
         return {
-            "id": self.id,
-            "traveler_id": self.traveler_id,
-            "house_id": self.house_id,
-            "start_date": self.start_date.isoformat(),
-            "end_date": self.end_date.isoformat(),
-            "status": self.status,
-            "created_at": self.created_at.isoformat(),
+            'id': self.id,
+            'startDate': self.start_date.strftime('%Y-%m-%d'),
+            'endDate': self.end_date.strftime('%Y-%m-%d'),
+            'totalPrice': self.total_price,
+            'house': {
+                'id': self.house.id,
+                'name': self.house.name,
+                'image1': self.house.image1,
+                'address': self.house.address,
+                'type': self.house.type
+            }
         }
     
 class Feedback(db.Model):

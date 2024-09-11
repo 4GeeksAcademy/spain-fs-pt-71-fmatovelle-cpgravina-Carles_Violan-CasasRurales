@@ -17,6 +17,7 @@ import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Protected } from "./pages/protected";
 import { Checkout } from './component/checkout/Checkout.js'
+import { Profile } from "./pages/profile.js";
 
 //static pages
 import { About } from "./pages/static/about";
@@ -46,6 +47,7 @@ const Layout = () => {
             <Route element={<Demo />} path="/demo" />
             <Route element={<Login />} path="/login" />
             <Route element={<Protected />} path="/protected" />
+            <Route element={<Profile />} path="/profile" />
             <Route element={<Register />} path="/register"  />          
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<Feedback />} path="/feedback" />

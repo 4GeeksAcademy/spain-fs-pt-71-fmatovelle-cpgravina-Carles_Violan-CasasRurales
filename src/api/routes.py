@@ -282,16 +282,18 @@ def submit_feedback():
 
 # # ENDPOINT PROTEGIDO VIEW RESERVATION
 
-# @api.route('/reservations', methods=['GET'])
-# @jwt_required()
-# def get_reservations():
-#     current_user_id = get_jwt_identity()
-    
-#     # Retrieve reservations for the logged-in user
-#     reservations = Reservation.query.filter_by(traveler_id=current_user_id).all()
-#     reservations_list = [reservation.serialize() for reservation in reservations]
+# ENDPOINT PROTEGIDO VIEW RESERVATION
 
-#     return jsonify(reservations_list), 200
+@api.route('/reservations', methods=['GET'])
+@jwt_required()
+def get_reservations():
+    current_user_id = get_jwt_identity()
+    
+    # Retrieve reservations for the logged-in user
+    reservations = Reservation.query.filter_by(traveler_id=current_user_id).all()
+    reservations_list = [reservation.serialize() for reservation in reservations]
+
+    return jsonify(reservations_list), 200
 
 
 # # ENDPOINT PROTEGIDO UPDATE RESERVATIONS
