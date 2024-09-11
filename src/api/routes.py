@@ -342,66 +342,70 @@ def get_reservations():
 
 # ENDPOINT PROTEGIDO CHECKOUT
 
-# @api.route('/checkout', methods=['POST'])
-# @jwt_required()
-# def checkout():
-#     """
-#     Endpoint to finalize a reservation by processing a payment and confirming it.
-#     """
-#     body = request.get_json()
-#     current_traveler_id = get_jwt_identity()  # Get the ID of the logged-in user
-#     current_traveler = Traveler.query.get(current_traveler_id)
+@api.route('/checkout', methods=['POST'])
+@jwt_required()
+def checkout():
+    """
+    Endpoint to finalize a reservation by processing a payment and confirming it.
+    """
+    body = request.get_json()
+    current_traveler_id = get_jwt_identity()  # Get the ID of the logged-in user
+    current_traveler = Traveler.query.get(current_traveler_id)
 
-#     traveler_role = current_traveler.role.value
+    traveler_role = current_traveler.role.value
 
-#     # Debugging: Print current traveler details
-#     print(f"Traveler ID: {current_traveler_id}, Role: {traveler_role}")
+    # Debugging: Print current traveler details
+    print(f"Traveler ID: {current_traveler_id}, Role: {traveler_role}")
 
-#     if traveler_role != 'TRAVELER': 
-#         return jsonify({"msg": "Access forbidden: Only travelers can perform checkout."}), 403
+    if traveler_role != 'TRAVELER': 
+        return jsonify({"msg": "Access forbidden: Only travelers can perform checkout."}), 403
 
-#     # Validate request data
-#     reservation_id = body.get('reservation_id')
-#     payment_details = body.get('payment_details')
+    # Validate request data
+    reservation_id = body.get('reservation_id')
+    payment_details = body.get('payment_details')
 
-#     # Debugging: Print reservation ID and payment details
-#     print(f"Reservation ID: {reservation_id}, Payment Details: {payment_details}")
+    # Debugging: Print reservation ID and payment details
+    print(f"Reservation ID: {reservation_id}, Payment Details: {payment_details}")
 
-#     if not reservation_id or not payment_details:
-#         return jsonify({"msg": "Missing reservation ID or payment details"}), 400
+    if not reservation_id or not payment_details:
+        return jsonify({"msg": "Missing reservation ID or payment details"}), 400
 
-#     # Retrieve reservation and validate ownership
-#     reservation = Reservation.query.filter_by(id=reservation_id, traveler_id=current_traveler_id).first()
-#     # Debugging: Print retrieved reservation details
-#     print(f"Retrieved Reservation: {reservation}")
+    # Retrieve reservation and validate ownership
+    reservation = Reservation.query.filter_by(id=reservation_id, traveler_id=current_traveler_id).first()
+    # Debugging: Print retrieved reservation details
+    print(f"Retrieved Reservation: {reservation}")
 
-#     if not reservation:
-#         return jsonify({"msg": "Reservation not found or unauthorized"}), 404
+    if not reservation:
+        return jsonify({"msg": "Reservation not found or unauthorized"}), 404
 
-#     # Check if the reservation is already confirmed
-#     if reservation.status == 'Confirmed':
-#         return jsonify({"msg": "Reservation is already confirmed"}), 400
+    # Check if the reservation is already confirmed
+    if reservation.status == 'Confirmed':
+        return jsonify({"msg": "Reservation is already confirmed"}), 400
 
-#     # Payment processing logic (this is a mock example)
-#     payment_successful = process_payment(payment_details)  # Replace with actual payment integration logic
+    # Payment processing logic (this is a mock example)
+    payment_successful = process_payment(payment_details)  # Replace with actual payment integration logic
 
-#     if not payment_successful:
-#         return jsonify({"msg": "Payment failed"}), 402  # 402 Payment Required is an appropriate status code here
+    if not payment_successful:
+        return jsonify({"msg": "Payment failed"}), 402  # 402 Payment Required is an appropriate status code here
 
-#     # Update reservation status to confirmed if payment is successful
-#     reservation.status = 'Confirmed'
-#     db.session.commit()
+    # Update reservation status to confirmed if payment is successful
+    reservation.status = 'Confirmed'
+    db.session.commit()
 
-#     return jsonify({"msg": "Checkout successful, reservation confirmed", "reservation": reservation.serialize()}), 200
+    return jsonify({"msg": "Checkout successful, reservation confirmed", "reservation": reservation.serialize()}), 200
 
-# def process_payment(payment_details):
-#     """
-#     Mock function to process payment. Replace this with real payment gateway integration.
-#     """
-#     # Perform payment gateway integration here (e.g., Stripe, PayPal, etc.)
-#     # For now, we'll just simulate a successful payment.
-#     return True  # Simulating successful payment
+def process_payment(payment_details):
+    """
+    Mock function to process payment. Replace this with real payment gateway integration.
+    """
+    # Perform payment gateway integration here (e.g., Stripe, PayPal, etc.)
+    # For now, we'll just simulate a successful payment.
+    return True  # Simulating successful payment
 
+#Terminar checkout 
+# probar en postman 
+# hacer fetch para guardar info en bd
+#  
 
 
 

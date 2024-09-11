@@ -399,9 +399,9 @@ def setup_commands(app):
     @app.cli.command("insert-test-data")
     def insert_test_data():
         print("\n\n--- Creating test data | START ---")
-        #insert_test_travelers()
-        #insert_test_houses()
-        #insert_test_housesFeatures() 
+        insert_test_travelers()
+        insert_test_houses()
+        insert_test_housesFeatures() 
         insert_test_reservations()
        #insert_test_feedback()
         print("--- Creating test data | END ---\n\n")

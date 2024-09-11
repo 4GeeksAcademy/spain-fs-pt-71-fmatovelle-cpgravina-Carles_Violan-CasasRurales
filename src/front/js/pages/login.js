@@ -7,7 +7,8 @@ export const Login = () => {
   const { actions } = useContext(Context);
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
-
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -16,13 +17,18 @@ export const Login = () => {
     const { success, role } = await actions.login(userName, password);
 
     if (success) {
-      if (role === "ADMIN") {
-        window.location.href = `${process.env.BACKEND_URL}/admin/`;
-      } else {
-        navigate("/");
-      }
+      setMessage("");
+      setMessageType("success"); 
+      setTimeout(() => {
+        if (role === "ADMIN") {
+          window.location.href = `${process.env.BACKEND_URL}/admin/`;
+        } else {
+          navigate("/");
+        }
+      }, 50);
     } else {
-      alert("Login failed, please try again.");
+      setMessage("Bad username or password");
+      setMessageType("error"); 
     }
   };
 
@@ -36,6 +42,17 @@ export const Login = () => {
           style={{ width: "72px", height: "72px" }}
         />
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+        
+        {message && (
+          <p
+            style={{
+              color: messageType === "success" ? "green" : "red", 
+            }}
+          >
+            {message}
+          </p>
+        )}
+
         <div className="form-floating">
           <input
             type="text"
@@ -70,3 +87,15 @@ export const Login = () => {
     </div>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
