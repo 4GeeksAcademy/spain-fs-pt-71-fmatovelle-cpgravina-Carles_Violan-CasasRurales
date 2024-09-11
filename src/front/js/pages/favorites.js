@@ -1,6 +1,7 @@
-import React, { useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { HouseCard } from "../component/houseCard";
+import { Title } from "../component/Title";
 
 export const Favorites = () => {
   const { store, actions } = useContext(Context);
@@ -15,14 +16,14 @@ export const Favorites = () => {
 
   return (
     <div className="container mt-4">
-      <h1 className="m-5">Your Favorite Houses</h1>
+      <Title title="Your favorite houses" />
       <div className="row">
         {favoriteHouses.length > 0 ? (
           favoriteHouses.map((house, index) => (
             <HouseCard house={house} index={index} key={house.id} />
           ))
         ) : (
-          <p className="m-5">You have no favorite houses yet.</p>
+          <Title subtitle="You have no favorite houses yet." />
         )}
       </div>
     </div>

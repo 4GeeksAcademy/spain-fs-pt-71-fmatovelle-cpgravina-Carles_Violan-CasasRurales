@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
+import { ConfirmationButton } from "../component/confirmationButton";
 
 export const Feedback = () => {
   const { actions } = useContext(Context);
@@ -10,13 +11,13 @@ export const Feedback = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!name || !email || !ratings) {
       alert("Please fill out all required fields.");
       return;
     }
-    
+
     const success = await actions.submitFeedback(name, email, ratings, message);
     if (success) {
       alert("Feedback submitted successfully.");
@@ -36,7 +37,10 @@ export const Feedback = () => {
       </p>
       <div className="row justify-content-center">
         <div className="col-lg-6 col-md-8 col-sm-10">
-          <form onSubmit={handleSubmit} className="bg-white p-4 rounded border-none">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white p-4 rounded border-none"
+          >
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
                 Name
@@ -137,17 +141,14 @@ export const Feedback = () => {
                 onChange={(e) => setMessage(e.target.value)}
               ></textarea>
             </div>
-
-            <div className="text-center">
-              <button type="submit" className="btn static-btn">
-                Send Feedback
-              </button>
-            </div>
+            <ConfirmationButton
+              text="Send Feedback"
+              onClick=""
+              buttonClass="btn search-button"
+            />
           </form>
         </div>
       </div>
     </div>
   );
 };
-
-
