@@ -3,6 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint, make_response
+from flask_mail import Mail, Message
 from api.models import db, Traveler, House, Feedback, Reservation
 from api.utils import generate_sitemap, APIException
 from sqlalchemy.exc import IntegrityError
@@ -400,10 +401,34 @@ def submit_feedback():
 #     # For now, we'll just simulate a successful payment.
 #     return True  # Simulating successful payment
 
+@api.route('/send-email', methods=['POST'])
+@jwt_required()
+def send_email():
+    # Retrieve the current user
+    current_user_id = get_jwt_identity()
+    current_user = Traveler.query.get(current_user_id)
 
+    # Check user role (you might have different roles or logic)
+    if current_user.role.value.strip().upper() != 'TRAVELER':
+        return jsonify({'message': 'Cannot perform that function!'}), 403
 
+    # Extract email details from request
+    data = request.json
+    recipient_email = data.get('recipient_email')
+    subject = data.get('subject', 'No Subject')
+    body = data.get('body', 'No Body Content')
 
+    if not recipient_email or not subject or not body:
+        return jsonify({'message': 'Missing required fields'}), 400
 
-
-
-
+    try:
+        # Create the email message
+        msg = Message(subject=subject,
+                      recipients=[recipient_email],
+                      body=body)
+        
+        # Send the email
+        mail.send(msg)
+        return jsonify({'message': 'Email sent successfully'}), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500

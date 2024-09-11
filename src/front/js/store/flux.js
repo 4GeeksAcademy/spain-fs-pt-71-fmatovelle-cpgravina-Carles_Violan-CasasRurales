@@ -30,6 +30,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             const { access_token, role } = res.data;
             localStorage.setItem("accessToken", access_token);
             await getActions().getCurrentUser();
+            console.log(access_token);
+            
 
             return { success: true, role };
           } else {
