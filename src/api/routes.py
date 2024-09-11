@@ -3,6 +3,8 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint, make_response
+from flask_mail import Message
+from src.app import mail
 from api.models import db, Traveler, House, Feedback, Reservation
 from api.utils import generate_sitemap, APIException
 from sqlalchemy.exc import IntegrityError
@@ -400,7 +402,24 @@ def submit_feedback():
 #     # For now, we'll just simulate a successful payment.
 #     return True  # Simulating successful payment
 
-
+@api.route('/send-email', methods=['POST'])
+def send_email():
+    data = request.get_json()
+    subject = data.get('subject')
+    recipient = data.get('recipient')
+    body = data.get('body')
+    
+    if not subject or not recipient or not body:
+        return jsonify({"error": "Missing required fields"}), 400
+    
+    msg = Message(subject=subject,
+                  recipients=[recipient],
+                  body=body)
+    try:
+        mail.send(msg)
+        return jsonify({"message": "Email sent successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 

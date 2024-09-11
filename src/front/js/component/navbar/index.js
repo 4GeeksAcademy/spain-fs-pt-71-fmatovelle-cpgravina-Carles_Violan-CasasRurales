@@ -129,7 +129,7 @@ export const Navbar = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-md-10 col-lg-8">
-            <div className="d-flex flex-wrap input-group shadow">
+            <div className="d-flex flex-wrap input-group shadow ">
               <input
                 type="text"
                 className="form-control border-top-0 border-bottom-0 border-start-0 rounded-start-pill"

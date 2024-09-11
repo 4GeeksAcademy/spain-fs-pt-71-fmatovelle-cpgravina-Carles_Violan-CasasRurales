@@ -15,7 +15,7 @@ export const Favorites = () => {
 
   return (
     <div className="container mt-4">
-      <h1 className="m-5">Your Favorite Houses</h1>
+      <h3 className="m-5">Your Favorite Houses</h3>
       <div className="row">
         {favoriteHouses.length > 0 ? (
           favoriteHouses.map((house, index) => (

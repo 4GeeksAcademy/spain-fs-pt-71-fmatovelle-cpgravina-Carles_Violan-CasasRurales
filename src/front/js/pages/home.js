@@ -19,7 +19,7 @@ export const Home = () => {
   return (
     <div>
       <MainCarousel />
-      <div>
+      <div className="container">
         <h1 className="ms-5">Experience the beauty of rural life</h1>
         {/* cards */}
         <div className="container mt-5">

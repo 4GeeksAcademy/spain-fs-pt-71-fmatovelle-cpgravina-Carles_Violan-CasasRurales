@@ -65,6 +65,11 @@ export const Login = () => {
         >
           Sign in
         </button>
+        <p className="mt-5 mb-3 text-body-secondary">
+          <a href="#" onClick={() => setResetPassword(true)}>
+            Forgot your password?
+          </a>
+        </p>
         <p className="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
       </form>
     </div>
