@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { MainCarousel } from "../component/mainCarousel";
-import { HouseCard } from "../component/houseCards";
+import { HouseCard } from "../component/houseCard";
 import { LoadingSpinner } from "../component/loadingSpinner";
+import { Title } from "../component/Title";
 import "../../styles/home.css";
 
 export const Home = () => {
@@ -20,7 +21,7 @@ export const Home = () => {
     <div>
       <MainCarousel />
       <div>
-        <h1 className="ms-5">Experience the beauty of rural life</h1>
+        <Title title="Experience the beauty of rural life" />
         {/* cards */}
         <div className="container mt-5">
           <div className="row">
@@ -34,6 +35,3 @@ export const Home = () => {
     </div>
   );
 };
-
-
-

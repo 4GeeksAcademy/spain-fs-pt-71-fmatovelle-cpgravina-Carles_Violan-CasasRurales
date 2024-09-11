@@ -79,14 +79,14 @@ export const Navbar = () => {
                         Welcome, {store.currentUser.userName}
                       </p>
                       <li>
-                        <Link className="dropdown-item" to="/protected">
+                        <Link className="dropdown-item" to="/profile">
                           Profile
                         </Link>
                       </li>
                       <li>
                         <Link
                           className="dropdown-item"
-                          to="/traveler/favorites"
+                          to="favorites"
                         >
                           Favorites
                         </Link>

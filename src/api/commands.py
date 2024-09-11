@@ -1,5 +1,7 @@
 from werkzeug.security import generate_password_hash
 from api.models import db, TravelerRole, Traveler, House, HouseFeatures, Reservation, Feedback
+from datetime import datetime, timedelta
+import random
 
 def build_test_user(user_name, role=TravelerRole.TRAVELER):
     hashed_password = generate_password_hash("12345")
@@ -334,18 +336,46 @@ def insert_test_housesFeatures():
 # class Reservation(db.Model):
 def insert_test_reservations():
     print("\nCreating test reservations")
-    # 
-    # Buscar por "name" las casas a las que se le quiere hacer la reserva de prueba
-    # 
-    # for x in range(1, 6):
-    #     user = Traveler()
-    #     user.email = "test_user" + str(x) + "@test.com"
-    #     user.password = "123456"
-    #     user.is_active = True
-    #     db.session.add(user)
-    #     db.session.commit()
-    #     print("User: ", user.email, " created.")
+
+    # Obtener todos los usuarios que no son administradores (Travelers)
+    travelers = Traveler.query.filter(Traveler.role == TravelerRole.TRAVELER).all()
+
+    # Obtener todas las casas
+    houses = House.query.all()
+
+    # Generar 3 reservas por cada usuario en diferentes casas
+    for traveler in travelers:
+        reserved_houses = set()  # Para evitar que un usuario reserve la misma casa dos veces
+        
+        for _ in range(3):
+            # Elegir una casa aleatoria que aún no haya sido reservada por este usuario
+            available_houses = [house for house in houses if house not in reserved_houses]
+            house = random.choice(available_houses)
+
+            # Definir fechas aleatorias para la reserva
+            start_date = datetime.now() + timedelta(days=random.randint(1, 30))
+            end_date = start_date + timedelta(days=random.randint(1, 7))
+
+            # Crear la reserva
+            reservation = Reservation(
+                traveler_id=traveler.id,
+                house_id=house.id,
+                start_date=start_date,
+                end_date=end_date,
+                total_price=(end_date - start_date).days * house.nightly_rate
+            )
+
+            # Añadir la reserva a la sesión
+            db.session.add(reservation)
+
+            # Marcar la casa como reservada por este usuario
+            reserved_houses.add(house)
+
+        db.session.commit()
+        print(f"Reservations created for user: {traveler.userName}")
+
     print("All test reservations created\n")
+
 
 # class Feedback(db.Model):
 def insert_test_feedback():
@@ -372,7 +402,7 @@ def setup_commands(app):
         insert_test_travelers()
         insert_test_houses()
         insert_test_housesFeatures() 
-        #insert_test_reservations()
-       # insert_test_feedback()
+        insert_test_reservations()
+       #insert_test_feedback()
         print("--- Creating test data | END ---\n\n")
         pass
