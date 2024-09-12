@@ -1,0 +1,53 @@
+/* styles.css */
+
+.house-card-container .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.house-card-container .card-body {
+    padding: 16px;
+}
+
+.house-card-container .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.house-card-container .carousel-item img {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+}
+
+.house-card-container .search-button {
+    background-color: #60c563;
+    color: white;
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0 0 8px 8px;
+    text-decoration: none;
+}
+
+.house-card-container .search-button:hover {
+    background-color: #4caf50;
+}
+
+/* Heart button hover effect */
+.house-card-container .heart-icon {
+    transition: color 0.3s ease, transform 0.3s ease; 
+    cursor: pointer; 
+}
+
+.house-card-container .heart-icon:hover {
+    transform: scale(1.2); 
+}
+
+.house-card-container .heart-icon.favorite i {
+    color: red; 
+}

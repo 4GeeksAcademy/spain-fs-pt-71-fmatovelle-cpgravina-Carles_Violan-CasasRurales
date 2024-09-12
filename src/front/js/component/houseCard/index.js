@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Context } from "../../store/appContext";
 import { Link } from "react-router-dom";
+import './styles.css'; // Make sure to import the updated styles
 
 export const HouseCard = ({ house, index }) => {
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
 
   const isFavorite = actions.isFavorite(house.id);
 
@@ -14,8 +15,9 @@ export const HouseCard = ({ house, index }) => {
       actions.addFavorite(house.id);
     }
   };
+
   return (
-    <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-4">
+    <div key={index} className="house-card-container col-lg-3 col-md-6 col-sm-12 mb-4">
       <div className="card rounded">
         <div
           id={`carouselExample${index}`}
@@ -100,12 +102,12 @@ export const HouseCard = ({ house, index }) => {
               <i className="fa-solid fa-euro-sign me-2 fs-5"></i>{" "}
               <p className="card-text mb-0">{house.nightly_rate} night</p>
             </div>
-            <div onClick={toggleFavorite} style={{ cursor: "pointer" }}>
+            <div onClick={toggleFavorite} className={`heart-icon ${isFavorite ? 'favorite' : ''}`}>
+              {/* Conditionally apply the 'favorite' class */}
               <i
                 className={`fa-${
                   isFavorite ? "solid" : "regular"
                 } fa-heart fs-5`}
-                style={{ color: isFavorite ? "red" : "black" }}
               ></i>
             </div>
           </div>
