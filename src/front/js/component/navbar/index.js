@@ -70,7 +70,7 @@ export const Navbar = () => {
                   aria-expanded="false"
                   style={{ width: "70px", height: "auto" }}
                 >
-                  <i className="fa-regular fa-user"></i>
+                  <i className="fa-regular fa-user text-white"></i>
                 </button>
                 <ul className="dropdown-menu fs-6 dropdown-menu-end mt-2 rounded">
                   {store.currentUser ? (
@@ -170,7 +170,7 @@ export const Navbar = () => {
                 className="input-group-text border-0 rounded-end-circle search-button"
                 id="search-addon"
               >
-                <i className="fas fa-search"></i>
+                <i className="fas fa-search text-white"></i>
               </span>
             </div>
           </div>

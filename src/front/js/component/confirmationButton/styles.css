@@ -1,0 +1,18 @@
+.confirmation-button {
+    background-color: rgb(91, 173, 9, 0.658); /* Green color for the confirm button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    width: 100%;
+    display: block;
+  }
+
+  .confirmation button:hover {
+    background-color: #4caf50; /* Hover effect for confirm button */
+    transform: scale(1.05);
+  }

@@ -38,10 +38,28 @@ export const Single = () => {
     house.image4,
   ].filter(Boolean);
 
+  const isFavorite = actions.isFavorite(house.id);
+
+  const toggleFavorite = (event) => {
+    event.preventDefault(); // Prevent default link behavior
+    if (isFavorite) {
+      actions.removeFavorite(house.id);
+    } else {
+      actions.addFavorite(house.id);
+    }
+  };
+
   return (
     <div className="container">
       <div className="jumbotron">
         <Title title={house.name} subtitle={house.address} />
+        <div className="ms-2">
+          <i
+            className={`fa-${isFavorite ? "solid" : "regular"} fa-heart fs-3`}
+            style={{ color: isFavorite ? "red" : "black", cursor: "pointer" }}
+            onClick={toggleFavorite}
+          ></i>
+        </div>
 
         <HouseImageGallery images={images} />
 
@@ -49,7 +67,7 @@ export const Single = () => {
 
         <Link to="/">
           <span
-            className="btn btn-primary btn-lg"
+            className="btn search-button text-start"
             role="button"
             style={{ marginBottom: "30px", float: "right" }}
           >
