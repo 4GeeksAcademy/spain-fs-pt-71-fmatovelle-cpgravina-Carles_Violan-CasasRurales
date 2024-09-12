@@ -20,3 +20,5 @@ export const HouseFeatures = ({ features }) => {
 HouseFeatures.propTypes = {
   features: PropTypes.object.isRequired,
 };
+
+
