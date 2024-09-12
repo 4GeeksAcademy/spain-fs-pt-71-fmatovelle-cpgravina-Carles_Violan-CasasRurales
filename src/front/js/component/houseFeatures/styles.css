@@ -1,0 +1,44 @@
+.house-features-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; 
+}
+.features-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 16px; 
+    color: #333; 
+    text-align: center; 
+}
+.features-list {
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    gap: 10px; 
+}
+.features-list li {
+    font-size: 1rem;
+    flex: 0 0 22%; 
+    padding: 8px 0; 
+    border-bottom: 1px solid #f0f0f0; 
+    color: #555; 
+}
+.features-list li:last-child {
+    border-bottom: none; 
+}
+@media (max-width: 992px) { 
+    .features-list li {
+        flex: 0 0 45%; 
+    }
+}
+@media (max-width: 768px) { 
+    .features-list li {
+        flex: 0 0 100%; 
+    }
+}
