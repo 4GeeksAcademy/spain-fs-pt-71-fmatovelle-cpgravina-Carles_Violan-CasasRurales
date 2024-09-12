@@ -3,9 +3,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
+
 import { Home } from "./pages/home";
 import { Single } from "./pages/single";
 import { Favorites } from "./pages/favorites.js";
+import { MainPage } from "./component/MainPage.js";
 
 import injectContext from "./store/appContext";
 
@@ -14,9 +16,11 @@ import { Navbar } from "./component/navbar/index.js";
 import { Footer } from "./component/footer/index.js";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
-import { Protected } from "./pages/protected";
+
 import { Checkout } from './component/checkout/Checkout.js'
 import { Profile } from "./pages/profile.js";
+
+
 
 //static pages
 import { About } from "./pages/static/about";
@@ -44,7 +48,7 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Login />} path="/login" />
-            <Route element={<Protected />} path="/protected" />
+            
             <Route element={<Profile />} path="/profile" />
             <Route element={<Register />} path="/register"  />          
             <Route element={<Single />} path="/single/:theid" />
@@ -52,6 +56,8 @@ const Layout = () => {
             <Route element={<Checkout />} path="/Checkout" />
             <Route element={<Favorites />} path="/favorites" />
             <Route element={<h1>Not found!</h1>} />
+
+            <Route path="/" element={<MainPage />} />  {/* Establece la ruta para MainPage */}
 
             {/* static routes */}
             <Route element={<About />} path="/about" />

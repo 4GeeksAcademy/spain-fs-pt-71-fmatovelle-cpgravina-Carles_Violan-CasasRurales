@@ -134,7 +134,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             bodyData
           );
           if (res.status === 200 || res.status === 201) {
-            return { success: true };
+           
+            const { access_token, role } = res.data;
+            localStorage.setItem("accessToken", access_token);
+            await getActions().getCurrentUser();
+
+            return { success: true, role };
+            
           } else {
             return { success: false, message: "Unexpected response status" };
           }

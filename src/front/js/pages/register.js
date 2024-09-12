@@ -34,9 +34,11 @@ export const Register = () => {
     const { success } = await actions.register(userName, email, password);
 
     if (success) {
+      
       setMessage("Registration successful!");
       setMessageType("success");
-      navigate("/login");
+      navigate("/");
+      
     } else {
       setMessage(
         "An error has occurred during registration. Please try again."
