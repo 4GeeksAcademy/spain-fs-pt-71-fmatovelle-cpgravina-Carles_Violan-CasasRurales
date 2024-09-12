@@ -3,9 +3,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
+
 import { Home } from "./pages/home";
 import { Single } from "./pages/single";
 import { Favorites } from "./pages/favorites.js";
+import { MainPage } from "./component/MainPage.js";
 
 import injectContext from "./store/appContext";
 
@@ -17,6 +19,8 @@ import { Register } from "./pages/register";
 import { Protected } from "./pages/protected";
 import { Checkout } from './component/checkout/Checkout.js'
 import { Profile } from "./pages/profile.js";
+
+
 
 //static pages
 import { About } from "./pages/static/about";
@@ -52,6 +56,8 @@ const Layout = () => {
             <Route element={<Checkout />} path="/Checkout" />
             <Route element={<Favorites />} path="/favorites" />
             <Route element={<h1>Not found!</h1>} />
+
+            <Route path="/" element={<MainPage />} />  {/* Establece la ruta para MainPage */}
 
             {/* static routes */}
             <Route element={<About />} path="/about" />

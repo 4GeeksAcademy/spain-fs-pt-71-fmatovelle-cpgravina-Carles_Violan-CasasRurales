@@ -26,7 +26,9 @@ export const Register = () => {
     const { success } = await actions.register(userName, email, password);
 
     if (success) {
-      navigate("/login");
+      
+      navigate("/");
+      
     } else {
       setModalTitle("An error has occured");
       setModalMessage(

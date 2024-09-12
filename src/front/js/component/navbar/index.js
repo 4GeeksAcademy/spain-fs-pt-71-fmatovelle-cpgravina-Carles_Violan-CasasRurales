@@ -9,9 +9,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
 
   const [destination, setDestination] = useState("");
-  const [checkInDate, setCheckInDate] = useState("");
-  const [checkOutDate, setCheckOutDate] = useState("");
-  const [guests, setGuests] = useState("");
+  
 
   useEffect(() => {
     actions.getCurrentUser();
@@ -23,14 +21,15 @@ export const Navbar = () => {
       navigate("/");
     }
   };
+  
 
-  const handleSearch = () => {
-    // Implement search functionality here or remove this section if we will not use a search bar
-    console.log({ destination, checkInDate, checkOutDate, guests });
+  const handleDestinationChange = (e) => {
+    setDestination(e.target.value); // Actualiza el estado del destino en el componente principal
   };
 
   return (
     <div>
+      
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <Link className="navbar-brand d-flex align-items-center" to="/">
@@ -128,51 +127,27 @@ export const Navbar = () => {
       </nav>
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-12 col-md-10 col-lg-8">
-            <div className="d-flex flex-wrap input-group shadow">
-              <input
-                type="text"
-                className="form-control border-top-0 border-bottom-0 border-start-0 rounded-start-pill"
-                placeholder="Destination"
-                value={destination}
-                aria-label="Destination"
-                aria-describedby="search-destination"
-                onChange={(e) => setDestination(e.target.value)}
-              />
-              <input
-                type="date"
-                className="form-control border-top-0 border-bottom-0 border-end-0"
-                placeholder="Check-in"
-                aria-label="Check-in"
-                aria-describedby="search-check-in"
-                value={checkInDate}
-                onChange={(e) => setCheckInDate(e.target.value)}
-              />
-              <input
-                type="date"
-                className="form-control border-top-0 border-bottom-0 border-end-0"
-                placeholder="Check-out"
-                aria-label="Check-out"
-                aria-describedby="search-check-out"
-                value={checkOutDate}
-                onChange={(e) => setCheckOutDate(e.target.value)}
-              />
-              <input
-                type="number"
-                className="form-control border-top-0 border-bottom-0 border-end-0 rounded-end-circle"
-                placeholder="Guests"
-                aria-label="guests"
-                aria-describedby="search-guests"
-                value={guests}
-                onChange={(e) => setGuests(e.target.value)}
-              />
+          <div className="col-12 col-md-4 col-lg-4">
+            {/* <div className="d-flex flex-wrap input-group shadow">
+            <select
+                className="form-select"
+                style={{ color: "grey" }}
+                onChange={handleDestinationChange} // Manejar el cambio de destino
+              >
+                <option value="">Choose your destination</option>
+                <option value="Madrid">Madrid</option>
+                <option value="Valencia">Valencia</option>
+                <option value="Barcelona">Barcelona</option>
+                <option value="Zaragoza">Zaragoza</option>
+          </select>
+             
               <span
                 className="input-group-text border-0 rounded-end-circle search-button"
                 id="search-addon"
               >
                 <i className="fas fa-search"></i>
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
