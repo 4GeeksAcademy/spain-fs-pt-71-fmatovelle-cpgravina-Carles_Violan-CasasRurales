@@ -82,12 +82,6 @@ export const Single = () => {
             </Marker>
           </Map>
         </div>
-
-        {/* <Link to="/">
-          <span className="btn btn-lg static-btn" href="#" role="button">
-            Back home
-          </span>
-        </Link> */}
       </div>
       <div className="mt-5">
         <BookingForm house={house} />
