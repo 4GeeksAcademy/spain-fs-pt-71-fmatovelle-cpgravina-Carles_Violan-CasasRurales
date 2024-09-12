@@ -1,14 +1,25 @@
-/* styles.css */
-
 .house-card-container .card {
     border: 1px solid #ddd;
     border-radius: 8px;
+    padding: 0px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
+
 
 .house-card-container .card-body {
     padding: 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.house-card-container .card-body p {
+    margin-bottom: 8px;
 }
 
 .house-card-container .card-title {
@@ -21,6 +32,12 @@
     object-fit: cover;
     height: 200px;
     width: 100%;
+}
+
+.house-card-container .carousel-control-prev,
+.house-card-container .carousel-control-next {
+    background-color: rgba(0, 0, 0, 0.2); /* Optional: Better visibility */
+    width: 30px;
 }
 
 .house-card-container .search-button {
@@ -40,14 +57,15 @@
 
 /* Heart button hover effect */
 .house-card-container .heart-icon {
-    transition: color 0.3s ease, transform 0.3s ease; 
-    cursor: pointer; 
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
 }
 
 .house-card-container .heart-icon:hover {
-    transform: scale(1.2); 
+    transform: scale(1.2);
 }
 
 .house-card-container .heart-icon.favorite i {
-    color: red; 
+    color: red;
 }
+

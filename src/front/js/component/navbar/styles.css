@@ -7,5 +7,6 @@
   }
 
   .search-icon {
-  background-color: rgb(91, 173, 9);
+    background-color: rgb(91, 173, 9, 0.658); /* Green color for the confirm button */
+    color: white;
 }

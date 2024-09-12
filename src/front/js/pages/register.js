@@ -1,25 +1,33 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Title } from "../component/Title";
+import { ConfirmationButton } from "../component/confirmationButton";
 import logo from "../../img/logo.jpeg";
-import { Modal } from "../component/Modal";
 
 export const Register = () => {
   const { actions } = useContext(Context);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [modalTitle, setModalTitle] = useState("");
-  const [modalMessage, setModalMessage] = useState("");
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+  
+    // Check if any field is empty
+    if (!userName || !email || !password) {
+      setMessage("All fields are required.");
+      setMessageType("error");
+      return;
+    }
+  
+    // Check if email contains '@'
     if (!email.includes("@")) {
-      setModalTitle("Incorrect email address");
-      setModalMessage("Please enter a valid email address.");
-      setIsModalVisible(true);
+      setMessage("Please enter a valid email address.");
+      setMessageType("error");
       return;
     }
 
@@ -27,19 +35,16 @@ export const Register = () => {
 
     if (success) {
       
+      setMessage("Registration successful!");
+      setMessageType("success");
       navigate("/");
       
     } else {
-      setModalTitle("An error has occured");
-      setModalMessage(
-        "An error has occured during registration. Please try again."
+      setMessage(
+        "An error has occurred during registration. Please try again."
       );
-      setIsModalVisible(true);
+      setMessageType("error");
     }
-  };
-
-  const closeModal = () => {
-    setIsModalVisible(false);
   };
 
   return (
@@ -51,8 +56,19 @@ export const Register = () => {
           alt="logo"
           style={{ width: "72px", height: "72px" }}
         />
-        <h1 className="h3 mb-3 fw-normal">Please sign up</h1>
-        <div className="form-floating">
+        <Title title="Please sign up" />
+         {/* Inline Message Display */}
+         {message && (
+          <p
+            style={{
+              color: messageType === "success" ? "green" : "red",
+            }}
+          >
+            {message}
+          </p>
+        )}
+
+        <div className="form-floating mt-5">
           <input
             type="text"
             className="form-control"
@@ -85,23 +101,13 @@ export const Register = () => {
           />
           <label htmlFor="floatingPassword">Password</label>
         </div>
-        <button
-          className="btn w-100 py-2 search-button"
-          type="submit"
+        <ConfirmationButton
+          text="Sign up" 
+          buttonClass="btn w-100 py-2 text-white"
           onClick={handleRegister}
-        >
-          Sign up
-        </button>
+        />
         <p className="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
       </form>
-
-      {/* Modal */}
-      <Modal
-        isVisible={isModalVisible}
-        onClose={closeModal}
-        title={modalTitle}
-        message={modalMessage}
-      />
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Title } from "../component/Title";
+import { ConfirmationButton } from "../component/confirmationButton";
 import logo from "../../img/logo.jpeg";
 
 export const Login = () => {
@@ -27,7 +29,7 @@ export const Login = () => {
         }
       }, 50);
     } else {
-      setMessage("Bad username or password");
+      setMessage("Incorrect username or password");
       setMessageType("error"); 
     }
   };
@@ -41,7 +43,7 @@ export const Login = () => {
           alt="logo"
           style={{ width: "72px", height: "72px" }}
         />
-        <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+         <Title title="Please sign in" />
         
         {message && (
           <p
@@ -53,7 +55,7 @@ export const Login = () => {
           </p>
         )}
 
-        <div className="form-floating">
+        <div className="form-floating mt-5">
           <input
             type="text"
             className="form-control"
@@ -75,13 +77,11 @@ export const Login = () => {
           />
           <label htmlFor="floatingPassword">Password</label>
         </div>
-        <button
-          className="btn w-100 py-2 search-button"
-          type="submit"
-          onClick={handleLogin}
-        >
-          Sign in
-        </button>
+        <ConfirmationButton
+          text="Sign in" 
+          buttonClass="btn w-100 py-2 text-white"
+          onClick={handleLogin} 
+        />
         <p className="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
       </form>
     </div>

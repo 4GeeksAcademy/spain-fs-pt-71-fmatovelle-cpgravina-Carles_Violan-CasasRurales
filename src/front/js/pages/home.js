@@ -51,7 +51,7 @@ export const Home = () => {
     <div>
       <MainCarousel />
 
-      <div className="container mt-5">
+      <div className="container mt-5" className="container">
         <Title title="Experience the beauty of rural life" />
         <br></br>
 

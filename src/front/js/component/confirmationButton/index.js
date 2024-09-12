@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import './styles.css'; 
 
 export const ConfirmationButton = ({ text, onClick, buttonClass }) => {
   return (
-    <div className="text-center">
+    <div className="text-center confirmation-button">
       <button type="button" className={buttonClass} onClick={onClick}>
         {text}
       </button>
@@ -13,7 +14,7 @@ export const ConfirmationButton = ({ text, onClick, buttonClass }) => {
 
 ConfirmationButton.defaultProps = {
   text: "Confirm",          
-  buttonClass: "btn static-btn", 
+  buttonClass: "text-white", 
   onClick: () => {},
 };
 
