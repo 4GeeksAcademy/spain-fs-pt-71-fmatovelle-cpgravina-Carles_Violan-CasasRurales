@@ -20,10 +20,10 @@ export const Home = () => {
   return (
     <div>
       <MainCarousel />
-      <div>
+      <div className="container">
         <Title title="Experience the beauty of rural life" />
         {/* cards */}
-        <div className="container mt-5">
+        <div className="container mt-4">
           <div className="row">
             {store.houses.map((house, index) => (
               <HouseCard key={index} house={house} index={index} />

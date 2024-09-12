@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../../store/appContext";
 import { Link } from "react-router-dom";
-import './styles.css'; // Make sure to import the updated styles
+import { ConfirmationButton } from "../confirmationButton";
+import "./styles.css";
 
 export const HouseCard = ({ house, index }) => {
   const { actions } = useContext(Context);
@@ -17,8 +18,14 @@ export const HouseCard = ({ house, index }) => {
   };
 
   return (
-    <div key={index} className="house-card-container col-lg-3 col-md-6 col-sm-12 mb-4">
-      <Link to={`/single/${house.id}`} className="text-decoration-none text-reset d-block ">
+    <div
+      key={index}
+      className="house-card-container col-lg-3 col-md-6 col-sm-12 mb-4"
+    >
+      <Link
+        to={`/single/${house.id}`}
+        className="text-decoration-none text-reset d-block"
+      >
         <div className="card rounded">
           <div
             id={`carouselExample${index}`}
@@ -103,19 +110,23 @@ export const HouseCard = ({ house, index }) => {
                 <i className="fa-solid fa-euro-sign me-2 fs-5"></i>{" "}
                 <p className="card-text mb-0">{house.nightly_rate} night</p>
               </div>
-              <div onClick={toggleFavorite} className={`heart-icon ${isFavorite ? 'favorite' : ''}`}>
+              <div
+                onClick={toggleFavorite}
+                className={`heart-icon ${isFavorite ? "favorite" : ""}`}
+              >
                 {/* Conditionally apply the 'favorite' class */}
-              <i
+                <i
                   className={`fa-${
                     isFavorite ? "solid" : "regular"
                   } fa-heart fs-5`}
-                  ></i>
+                ></i>
               </div>
             </div>
           </div>
-          <div className="btn search-button">
-            Learn more
-          </div>
+          <ConfirmationButton
+            text="Learn more"
+            buttonClass="btn w-100 py-2 text-white"
+          />
         </div>
       </Link>
     </div>
