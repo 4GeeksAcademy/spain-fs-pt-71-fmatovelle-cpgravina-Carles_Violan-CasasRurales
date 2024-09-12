@@ -10,6 +10,8 @@ export const BookingForm = ({ house }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalMessage, setModalMessage] = useState("");
+  const [modalConfirmText, setModalConfirmText] = useState("");
+  const [modalCancelText, setModalCancelText] = useState("");
   const navigate = useNavigate();
 
   const handleDateChange = (start, end) => {
@@ -22,10 +24,12 @@ export const BookingForm = ({ house }) => {
       actions.setBookingDetails(house, dates.startDate, dates.endDate);
       navigate("/Checkout");
     } else {
-      setModalTitle("Dates Required");
+      setModalTitle("Dates are required");
       setModalMessage(
         "Please select both a start and end date to proceed with your booking."
       );
+      setModalConfirmText("Select dates");
+      setModalCancelText("Close");
       setIsModalVisible(true);
     }
   };
@@ -53,6 +57,8 @@ export const BookingForm = ({ house }) => {
         onClose={closeModal}
         title={modalTitle}
         message={modalMessage}
+        confirmText={modalConfirmText}
+        cancelText={modalCancelText}
       />
     </div>
   );
