@@ -11,7 +11,6 @@ export const BookingForm = ({ house }) => {
   const [modalTitle, setModalTitle] = useState("");
   const [modalMessage, setModalMessage] = useState("");
   const navigate = useNavigate();
- 
 
   const handleDateChange = (start, end) => {
     setDates({ startDate: start, endDate: end });
