@@ -1,0 +1,124 @@
+/* General container styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Jumbotron card styling */
+  .jumbotron {
+    background-color: #f8f9fa; /* Light background */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 40px;
+  }
+  
+  /* Title and subtitle styling */
+  .jumbotron h1,
+  .jumbotron h3 {
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+    color: #333; /* Darker text for contrast */
+  }
+  
+  /* Image gallery styling */
+  .house-image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .house-image-gallery img {
+    width: calc(33.333% - 10px); /* 3 images per row */
+    border-radius: 8px;
+    transition: transform 0.3s; /* Smooth zoom on hover */
+  }
+  
+  .house-image-gallery img:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+  }
+  
+  /* House features list styling */
+  .house-features {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .house-features li {
+    background-color: #e9ecef; /* Light gray background */
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #555; /* Muted text color */
+  }
+  
+  /* Favorite button styling */
+  .favorite-button {
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    color: #ff6b6b; /* Red color for heart */
+    transition: color 0.3s;
+  }
+  
+  .favorite-button:hover {
+    color: #ff4c4c; /* Darker red on hover */
+  }
+  
+  /* Map container styling */
+  .map-container {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for map */
+  }
+  
+  /* Back home button styling */
+  .back-home-button {
+    margin-top: 30px;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .back-home-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Booking form container styling */
+  .booking-form-container {
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    margin-top: 40px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .house-image-gallery img {
+      width: calc(50% - 10px); /* 2 images per row on smaller screens */
+    }
+  
+    .jumbotron {
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .house-image-gallery img {
+      width: 100%; /* 1 image per row on small screens */
+    }
+  }
+  

@@ -33,6 +33,7 @@ export const Checkout = () => {
 
   // Load booking details from localStorage when the component mounts
   useEffect(() => {
+    if (!localStorage.getItem("accessToken")) navigate ("/login") //codigo god
     const savedHouse = JSON.parse(localStorage.getItem('house'));
     const savedStartDate = localStorage.getItem('startDate');
     const savedEndDate = localStorage.getItem('endDate');
