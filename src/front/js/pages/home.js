@@ -15,8 +15,8 @@ export const Home = () => {
   }, []);
 
   // Controlador de cambio de destino
-  const handleDestinationChange = (e) => {
-    setDestination(e.target.value);
+  const handleDestinationChange = (value) => {
+    setDestination(value);
   };
 
   // Filtrar las casas según el destino seleccionado
@@ -36,9 +36,15 @@ export const Home = () => {
     } else if (destination.toLowerCase() === "madrid") {
       return (
         house.name.toLowerCase() === "cozy cave house" ||
-        house.name.toLowerCase() === "urban retreat" ||
+        house.name.toLowerCase() === "peaceful cabin" ||
         house.name.toLowerCase() === "quiet corner"
       );
+    } else if (destination.toLowerCase() === "bilbao") {
+      return house.name.toLowerCase() === "serene bungalow";
+    } else if (destination.toLowerCase() === "zaragoza") {
+      return house.name.toLowerCase() === "rustic lodge";
+    } else if (destination.toLowerCase() === "malaga") {
+      return house.name.toLowerCase() === "quiet house";
     }
     return true; // Si no se selecciona un destino, mostrar todas las casas
   });
@@ -51,26 +57,79 @@ export const Home = () => {
     <div>
       <MainCarousel />
 
-      <div className="container mt-5" className="container">
+      <div className="container mt-5">
         <Title title="Experience the beauty of rural life" />
-        <br></br>
+        <br />
 
-        {/* Selector de destino */}
-        <div className="mb-4">
-          <label htmlFor="destination" className="form-label">
-            Select a destination:
-          </label>
-          <select
-            id="destination"
-            className="form-select"
-            value={destination}
-            onChange={handleDestinationChange}
+        {/* Dropdown de destino con botón verde */}
+        <div className="dropdown mb-4">
+          <button
+            className="btn btn-success dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
-            <option value="">All Destinations</option>
-            <option value="Barcelona">Barcelona</option>
-            <option value="Valencia">Valencia</option>
-            <option value="Madrid">Madrid</option>
-          </select>
+            Select a destination
+          </button>
+          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li>
+              <button
+                className="dropdown-item"
+                onClick={() => handleDestinationChange("")}
+              >
+                All Destinations
+              </button>
+            </li>
+            <li>
+              <button
+                className="dropdown-item"
+                onClick={() => handleDestinationChange("Barcelona")}
+              >
+                Barcelona
+              </button>
+            </li>
+            <li>
+              <button
+                className="dropdown-item"
+                onClick={() => handleDestinationChange("Valencia")}
+              >
+                Valencia
+              </button>
+            </li>
+            <li>
+              <button
+                className="dropdown-item"
+                onClick={() => handleDestinationChange("Madrid")}
+              >
+                Madrid
+              </button>
+            </li>
+            <li>
+              <button
+                className="dropdown-item"
+                onClick={() => handleDestinationChange("Zaragoza")}
+              >
+                Zaragoza
+              </button>
+            </li>
+            <li>
+              <button
+                className="dropdown-item"
+                onClick={() => handleDestinationChange("Bilbao")}
+              >
+                Bilbao
+              </button>
+            </li>
+            <li>
+              <button
+                className="dropdown-item"
+                onClick={() => handleDestinationChange("Malaga")}
+              >
+                Málaga
+              </button>
+            </li>
+          </ul>
         </div>
 
         {/* Cards de casas filtradas */}
