@@ -4,7 +4,7 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Ensure the image stays within the card */
+    overflow: hidden;
 }
 
 .house-card-container .card-body {
@@ -20,7 +20,7 @@
 .house-card-container .carousel-item img {
     object-fit: cover;
     height: 200px;
-    width: 100%; /* Make sure images fill the width */
+    width: 100%;
 }
 
 .house-card-container .search-button {
@@ -40,14 +40,14 @@
 
 /* Heart button hover effect */
 .house-card-container .heart-icon {
-    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for color and scale change */
-    cursor: pointer; /* Cursor change to indicate it's clickable */
+    transition: color 0.3s ease, transform 0.3s ease; 
+    cursor: pointer; 
 }
 
 .house-card-container .heart-icon:hover {
-    transform: scale(1.2); /* Slightly increase the size for a 'pop' effect */
+    transform: scale(1.2); 
 }
 
 .house-card-container .heart-icon.favorite i {
-    color: red; /* Make the heart red when it is a favorite */
+    color: red; 
 }
