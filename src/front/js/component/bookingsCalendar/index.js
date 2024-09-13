@@ -71,9 +71,6 @@ export const BookingsCalendar = ({ onDateChange }) => {
         </div>
       </div>
       <div className="text-center mt-4">
-        <button onClick={handleSubmit} role="button" className="book-button">
-          Book this house
-        </button>
       </div>
     </div>
   );

@@ -47,6 +47,9 @@ export const BookingForm = ({ house }) => {
       <div className="bookings-calendar">
         <BookingsCalendar onDateChange={handleDateChange} />
       </div>
+      <button className="btn search-button" onClick={handleSubmit}>
+        Book this property
+      </button>
 
 
 
