@@ -1,0 +1,153 @@
+  
+  .react-datepicker__navigation:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
+  
+  /* Change the icon for the next button */
+  .react-datepicker__navigation--next::after {
+    content: '›'; /* Custom right arrow */
+    font-size: 1.2rem; /* Size of the arrow */
+    font-weight: bold; /* Bold for the arrow */
+  }
+  
+  /* Change the icon for the previous button */
+  .react-datepicker__navigation--previous::after {
+    content: '‹'; /* Custom left arrow */
+    font-size: 1.2rem; /* Size of the arrow */
+    font-weight: bold; /* Bold for the arrow */
+  }
+  
+  /* Date Picker Header */
+  .react-datepicker__header {
+    background-color: #4caf50; /* Primary color for the header */
+    color: #fff; /* White text */
+    border-top-left-radius: 8px; /* Rounded top corners */
+    border-top-right-radius: 8px; /* Rounded top corners */
+    padding: 8px 0; /* Reduced padding */
+    font-size: 1rem; /* Adjusted font size */
+    font-weight: 500; /* Adjusted font weight */
+    margin-bottom: 5px; /* Add margin to separate header from days */
+    box-sizing: border-box; /* Ensure padding does not affect size */
+  }
+  
+  /* Date Picker Month Year Header */
+  .react-datepicker__current-month {
+    font-size: 1.1rem; /* Adjusted font size */
+    font-weight: 600; /* Font weight for month and year */
+    margin: 0; /* Remove default margin */
+  }
+  
+  /* Date Picker Days */
+  .react-datepicker__day--selected,
+  .react-datepicker__day--in-selecting-range,
+  .react-datepicker__day--in-range {
+    background-color: #4caf50; /* Primary color for selected dates */
+    color: #fff; /* White text */
+    border-radius: 50%; /* Rounded selected date */
+    font-weight: bold; /* Bold font for selected dates */
+    border: none; /* Remove border */
+    box-shadow: none; /* Remove shadow */
+  }
+  
+  /* Date Picker Navigation Arrow Position Fix */
+  .react-datepicker__navigation--next {
+    right: 10px; /* Adjust position */
+  }
+  
+  .react-datepicker__navigation--previous {
+    left: 10px; /* Adjust position */
+  }
+  
+  /* Highlighted Dates */
+  .react-datepicker__day--highlighted {
+    background-color: #ffc107; /* Yellow background for highlighted dates */
+    color: #212529; /* Dark text color for better readability */
+  }
+  
+  /* Buttons inside the date picker */
+  .react-datepicker__navigation--next:hover,
+  .react-datepicker__navigation--previous:hover {
+    opacity: 1; /* Full opacity on hover */
+  }
+  
+
+  
+/* Book Button */
+.booking-form .btn {
+    display: block; /* Center the button */
+    margin: 30px auto; /* Center and add more spacing */
+    background-color: rgb(91, 173, 9, 0.658); /* Consistent green color */
+    color: #fff; /* White text */
+    padding: 12px 30px; /* Padding for larger clickable area */
+    font-size: 1rem; /* Larger text for accessibility */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded button */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Smooth transition */
+    max-width: 300px; /* Ensure button width does not exceed container */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+  }
+  
+  .booking-form .btn:hover {
+    background-color: #4caf50; /* Darker green on hover */
+  }
+
+  .book-button {
+    background-color: rgb(91, 173, 9, 0.658); /* Green background color */
+    color: #fff; /* White text */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Add padding for better size */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    font-size: 16px; /* Increase font size */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    margin-top: 20px; /* Add margin to the top */
+  }
+  
+  .book-button:hover {
+    background-color: #4caf50; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+  }
+  
+  .book-button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 3px rgb(91, 173, 9, 0.658); /* Custom focus outline */
+  }
+  
+  .book-button:active {
+    transform: scale(0.98); /* Scale down on click */
+  }
+  
+  /* Container for Date Picker Calendars */
+.calendar-container {
+    display: flex; /* Align items side by side */
+    justify-content: center; /* Center the items */
+    align-items: center; /* Vertically center items */
+    gap: 20px; /* Space between calendars */
+    margin-bottom: 30px; /* Space below the container */
+  }
+  
+  /* Calendar Wrapper */
+  .calendar-wrapper {
+    padding: 10px; /* Add some padding around the calendar */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f8f9fa; /* Light background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s; /* Smooth transform */
+  }
+  
+  /* Calendar Header Styling */
+  .react-datepicker__header {
+    background-color: #28a745; /* Primary color for the header */
+    color: #fff; /* White text */
+    border-top-left-radius: 8px; /* Rounded top corners */
+    border-top-right-radius: 8px; /* Rounded top corners */
+    padding: 8px 0; /* Reduced padding */
+    font-size: 1rem; /* Adjusted font size */
+    font-weight: 500; /* Adjusted font weight */
+    margin-bottom: 5px; /* Add margin to separate header from days */
+    box-sizing: border-box; /* Ensure padding does not affect size */
+  }
+  
+  /* Other Date Picker Styles Remain the Same */
+  

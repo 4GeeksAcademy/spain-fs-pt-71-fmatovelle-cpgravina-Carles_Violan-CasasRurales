@@ -23,7 +23,7 @@ export const HouseCard = ({ house, index }) => {
       className="house-card-container col-lg-3 col-md-6 col-sm-12 mb-4"
     >
       <Link
-        to={`/single/${house.id}`}
+        to={`/singleHouse/${house.id}`}
         className="text-decoration-none text-reset d-block"
       >
         <div className="card rounded">
@@ -105,7 +105,7 @@ export const HouseCard = ({ house, index }) => {
             <h5 className="card-title fs-5">{house.name}</h5>
             <p className="card-text">{house.address}</p>
             <p className="card-text">Type: {house.type}</p>
-            <div className="d-flex justify-content-between align-items-center fs-5">
+            <div className="price-heart-container">
               <div className="d-flex align-items-center">
                 <i className="fa-solid fa-euro-sign me-2 fs-5"></i>{" "}
                 <p className="card-text mb-0">{house.nightly_rate} night</p>

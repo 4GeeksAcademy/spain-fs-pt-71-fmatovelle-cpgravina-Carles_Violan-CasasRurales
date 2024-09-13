@@ -1,124 +1,198 @@
-/* General container styling */
-.container {
+/* General container styling for SingleHouse component */
+.single-house-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #f8f9fa; /* Light background for contrast */
   }
   
-  /* Jumbotron card styling */
-  .jumbotron {
-    background-color: #f8f9fa; /* Light background */
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    margin-bottom: 40px;
+  /* Title and Subtitle */
+  .single-house-title {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    text-align: center;
   }
   
-  /* Title and subtitle styling */
-  .jumbotron h1,
-  .jumbotron h3 {
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 20px;
-    color: #333; /* Darker text for contrast */
+  .single-house-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    color: #6c757d;
+    text-align: center;
   }
   
-  /* Image gallery styling */
-  .house-image-gallery {
+  /* Image Gallery */
+  .single-house-image-gallery {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    justify-content: center; /* Center images */
     margin-bottom: 30px;
   }
   
-  .house-image-gallery img {
-    width: calc(33.333% - 10px); /* 3 images per row */
+  .single-house-image-gallery img {
+    width: calc(25% - 10px); /* 4 images per row */
     border-radius: 8px;
     transition: transform 0.3s; /* Smooth zoom on hover */
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   }
   
-  .house-image-gallery img:hover {
-    transform: scale(1.05); /* Slight zoom effect */
+  .single-house-image-gallery img:hover {
+    transform: scale(1.05);
   }
   
-  /* House features list styling */
-  .house-features {
+  /* Features Section */
+  .single-house-features {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .single-house-features h4 {
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .single-house-features ul {
     list-style: none;
     padding: 0;
-    margin: 20px 0;
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
   }
   
-  .house-features li {
-    background-color: #e9ecef; /* Light gray background */
+  .single-house-features li {
+    width: calc(33.333% - 10px);
+    background-color: #f8f9fa; /* Light gray background */
     padding: 10px 15px;
     border-radius: 5px;
-    font-size: 0.9rem;
-    color: #555; /* Muted text color */
+    font-size: 1rem;
+    text-align: center;
+    color: #555;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
   
-  /* Favorite button styling */
-  .favorite-button {
+  /* Button Styling */
+  .single-house-back-button,
+  .single-house-booking-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
     border: none;
-    background: none;
-    font-size: 1.5rem;
-    color: #ff6b6b; /* Red color for heart */
-    transition: color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+    width: 100%; /* Make buttons full width for better alignment */
+    text-align: center;
   }
   
-  .favorite-button:hover {
-    color: #ff4c4c; /* Darker red on hover */
+  .single-house-back-button:hover,
+  .single-house-booking-button:hover {
+    background-color: #218838;
   }
   
-  /* Map container styling */
-  .map-container {
+  /* Map Container */
+  .single-house-map-container {
     height: 400px;
     width: 100%;
     margin-bottom: 30px;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for map */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  /* Back home button styling */
-  .back-home-button {
-    margin-top: 30px;
-    background-color: #007bff; /* Bootstrap primary color */
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-  
-  .back-home-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-  }
-  
-  /* Booking form container styling */
-  .booking-form-container {
+  /* Booking Form Styling */
+  .single-house-booking-form-container {
     padding: 20px;
-    background-color: #f1f1f1;
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    margin-top: 40px;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin: 0 auto; /* Center the form */
   }
   
-  /* Responsive adjustments */
+  .single-house-booking-form-container h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    text-align: center; /* Center heading */
+  }
+  
+  .single-house-booking-form-container .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .single-house-booking-form-container .form-control,
+  .single-house-booking-form-container .btn {
+    width: 100%; /* Full width input fields */
+    margin-bottom: 15px;
+  }
+  
+  /* Responsive Adjustments */
   @media (max-width: 768px) {
-    .house-image-gallery img {
+    .single-house-image-gallery img {
       width: calc(50% - 10px); /* 2 images per row on smaller screens */
     }
   
-    .jumbotron {
-      padding: 20px;
+    .single-house-features li {
+      width: 100%;
+    }
+  
+    .single-house-booking-form-container {
+      padding: 15px;
     }
   }
   
   @media (max-width: 576px) {
-    .house-image-gallery img {
+    .single-house-image-gallery img {
       width: 100%; /* 1 image per row on small screens */
     }
+  
+    .single-house-container {
+      padding: 10px;
+    }
+  }
+  
+  /* Custom Styles for Back Home Button */
+.search-button {
+    background-color: rgb(91, 173, 9, 0.658); /* Green background color */
+    color: #fff; /* White text */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  }
+  
+  .search-button:hover {
+    background-color: #4caf50; /* Darker green on hover */
+    color: #fff; /* Ensure text remains white */
+    text-decoration: none; /* Remove underline or any text decoration */
+  }
+  
+  .search-button:focus {
+    outline: none; /* Remove default focus outline */
+  }
+  
+
+  /* Style for horizontal rule */
+.my-4 {
+    border: none; /* Remove default border */
+    height: 1px; /* Set a thin height */
+    background-color: #ddd; /* Subtle grey color */
+    margin-top: 30px; /* Adjust the top margin */
+    margin-bottom: 15px; /* Adjust the bottom margin */
+    width: 90%; /* Control the width of the line */
+    margin-left: auto; /* Center align */
+    margin-right: auto; /* Center align */
   }
   
