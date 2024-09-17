@@ -1,11 +1,11 @@
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint, make_response
-#from flask_mail import Message
+from flask_mail import Message
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_jwt_cookies
 from werkzeug.security import check_password_hash, generate_password_hash
 
-# from src.app import mail
+from mail import mail
 from api.models import db, Traveler, House, Feedback, Reservation
 from api.utils import generate_sitemap, APIException
 
@@ -218,18 +218,12 @@ def send_email():
     subject = data.get('subject')
     recipient = data.get('recipient')
     body = data.get('body')
-    
-    if not subject or not recipient or not body:
-        return jsonify({"error": "Missing required fields"}), 400
-    
-    msg = Message(subject=subject,
-                  recipients=[recipient],
-                  body=body)
-    try:
-        mail.send(msg)
-        return jsonify({"message": "Email sent successfully"}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+
+    msg = Message(subject, recipients=[recipient])
+    msg.body = body
+
+    mail.send(msg)
+    return jsonify({"message": "Email sent successfully"}), 200
 
 
 

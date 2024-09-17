@@ -3,11 +3,12 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
-# from flask_mail import Mail
+
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
+from mail import mail
 
 from api.utils import APIException, generate_sitemap
 from api.models import db
@@ -42,16 +43,18 @@ db.init_app(app)
 
 jwt = JWTManager(app)
 
-# # Configure Flask-Mail
-# app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
-# app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
-# app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-# app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-# app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
-# app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True'
+# Configure Flask-Mail
+app.config['MAIL_SERVER'] = "sandbox.smtp.mailtrap.io"
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = "c1eb8ae66deeb0"
+app.config['MAIL_PASSWORD'] = "04585f65618ec3"
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_DEBUG'] = True
+app.config['MAIL_DEFAULT_SENDER'] = ('RuralExperience', 'ruralexperiencewebsite@gmail.com')
 
-# # Initialize Mail
-# mail = Mail(app)
+mail.init_app(app)
+
 
 # add the admin
 setup_admin(app)
