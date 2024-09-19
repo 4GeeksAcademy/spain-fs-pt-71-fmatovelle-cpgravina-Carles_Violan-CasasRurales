@@ -13,6 +13,38 @@ export const Home = () => {
     actions.getAllHouses();
   }, []);
 
+
+  // Controlador de cambio de destino
+  const handleDestinationChange = (value) => {
+    setDestination(value);
+  };
+
+  // Filtrar las casas según el destino seleccionado
+  const filteredHouses = store.houses.filter((house) => {
+    if (destination.toLowerCase() === "barcelona") {
+      return (
+        house.city.toLowerCase() === "barcelona"
+       
+      );
+    } else if (destination.toLowerCase() === "valencia") {
+      return (
+        house.city.toLowerCase() === "valencia"
+      );
+    } else if (destination.toLowerCase() === "madrid") {
+      return (
+       house.city.toLowerCase() === "madrid"
+      );
+    } else if (destination.toLowerCase() === "bilbao") {
+      return house.city.toLowerCase() === "bilbao"
+    } else if (destination.toLowerCase() === "zaragoza") {
+      return house.city.toLowerCase() === "zaragoza"
+    } else if (destination.toLowerCase() === "malaga") {
+      return house.city.toLowerCase() === "malaga"
+    }
+    return true; // Si no se selecciona un destino, mostrar todas las casas
+  });
+
+
   if (!store.houses || store.houses.length === 0) {
     return <LoadingSpinner />;
   }
