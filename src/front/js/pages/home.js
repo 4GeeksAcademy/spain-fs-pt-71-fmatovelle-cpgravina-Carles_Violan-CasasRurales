@@ -23,28 +23,23 @@ export const Home = () => {
   const filteredHouses = store.houses.filter((house) => {
     if (destination.toLowerCase() === "barcelona") {
       return (
-        house.name.toLowerCase() === "sunny cottage" ||
-        house.name.toLowerCase() === "quiet farmhouse" ||
-        house.name.toLowerCase() === "cozy villa"
+        house.city.toLowerCase() === "barcelona"
+       
       );
     } else if (destination.toLowerCase() === "valencia") {
       return (
-        house.name.toLowerCase() === "quiet cabin" ||
-        house.name.toLowerCase() === "rustic house" ||
-        house.name.toLowerCase() === "sunset villa"
+        house.city.toLowerCase() === "valencia"
       );
     } else if (destination.toLowerCase() === "madrid") {
       return (
-        house.name.toLowerCase() === "cozy cave house" ||
-        house.name.toLowerCase() === "peaceful cabin" ||
-        house.name.toLowerCase() === "quiet corner"
+       house.city.toLowerCase() === "madrid"
       );
     } else if (destination.toLowerCase() === "bilbao") {
-      return house.name.toLowerCase() === "serene bungalow";
+      return house.city.toLowerCase() === "bilbao"
     } else if (destination.toLowerCase() === "zaragoza") {
-      return house.name.toLowerCase() === "rustic lodge";
+      return house.city.toLowerCase() === "zaragoza"
     } else if (destination.toLowerCase() === "malaga") {
-      return house.name.toLowerCase() === "quiet house";
+      return house.city.toLowerCase() === "malaga"
     }
     return true; // Si no se selecciona un destino, mostrar todas las casas
   });
