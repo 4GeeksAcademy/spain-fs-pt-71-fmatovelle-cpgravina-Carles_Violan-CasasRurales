@@ -1,0 +1,96 @@
+/* Container for the profile and reservations */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* User Information Card */
+.user-info-card {
+    width: 350px;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 40px; /* Increase space from reservations */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.user-info-card img {
+    width: 120px; /* Make profile image larger */
+    height: 120px;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.user-info-card .card-title {
+    font-size: 1.5rem; /* Larger title font */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Reservations List */
+.reservations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+/* Reservation Card */
+.reservation-card {
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.reservation-card:hover {
+    transform: translateY(-5px); /* Elevate slightly */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Reservation Image */
+.reservation-card img {
+    border-radius: 8px;
+    width: 100%;
+    max-height: 200px; /* Make image larger */
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Reservation Text */
+.reservation-card h5 {
+    font-size: 1.2rem; /* Make the title more prominent */
+    margin-bottom: 10px;
+}
+
+.reservation-card p {
+    font-size: 0.9rem;
+    color: #666; /* Subtle color for details */
+    margin-bottom: 5px;
+}
+
+.reservation-card .btn {
+    margin-top: 10px;
+    background-color: #60c563;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reservation-card .btn:hover {
+    background-color: #4caf50;
+}

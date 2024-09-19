@@ -1,17 +1,41 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
-import { Context } from "../store/appContext";
-import { BookingForm } from "../component/bookingForm";
-import { Title } from "../component/Title";
-import { HouseImageGallery } from "../component/houseImageGallery";
-import { HouseFeatures } from "../component/houseFeatures";
-import Map, { Marker } from "react-map-gl";
+import { Context } from "../../store/appContext"; // Corrected path to appContext
+import { BookingForm } from "../../component/bookingForm"; // Corrected path to BookingForm
+import { Title } from "../../component/Title"; // Corrected path to Title
+import { HouseImageGallery } from "../../component/houseImageGallery"; // Corrected path to HouseImageGallery
+import { HouseFeatures } from "../../component/houseFeatures"; // Corrected path to HouseFeatures
+import Spinner from 'react-bootstrap/Spinner';
+import Button from 'react-bootstrap/Button';
 
-export const Single = () => {
+import Map, { Marker } from "react-map-gl";
+import "./styles.css";
+
+export const SingleHouse = () => {
   const { store, actions } = useContext(Context);
   const params = useParams();
   const [house, setHouse] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    function handleHouses() {
+      // Buscar la casa específica según el id en los params
+      const selectedHouse = store.houses.find(
+        (h) => h.id === parseInt(params.theid)
+      );
+      setHouse(selectedHouse);
+    }
+    const withHouses = store.houses.length > 0;
+    if (withHouses) {
+      handleHouses()
+      setIsLoading(false)
+    } else {
+      actions.getAllHouses();
+    }
+  }, [store.houses]);
+
 
   // API key de Mapbox
   const MAPBOX_TOKEN =
@@ -27,7 +51,7 @@ export const Single = () => {
     setHouse(selectedHouse);
   }, [store.houses, params.theid]);
 
-  if (!house) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -93,9 +117,6 @@ export const Single = () => {
             {/* Marcador para la ubicación de la casa */}
             <Marker latitude={house.latitude} longitude={house.longitude}>
               <div>
-                <span role="img" aria-label="marker">
-                  🏡
-                </span>
               </div>
             </Marker>
           </Map>
@@ -108,6 +129,6 @@ export const Single = () => {
   );
 };
 
-Single.propTypes = {
+SingleHouse.propTypes = {
   match: PropTypes.object,
 };

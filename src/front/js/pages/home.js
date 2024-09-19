@@ -8,11 +8,11 @@ import "../../styles/home.css";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
-  const [destination, setDestination] = useState("");
 
   useEffect(() => {
     actions.getAllHouses();
   }, []);
+
 
   // Controlador de cambio de destino
   const handleDestinationChange = (value) => {
@@ -44,6 +44,7 @@ export const Home = () => {
     return true; // Si no se selecciona un destino, mostrar todas las casas
   });
 
+
   if (!store.houses || store.houses.length === 0) {
     return <LoadingSpinner />;
   }
@@ -51,91 +52,16 @@ export const Home = () => {
   return (
     <div>
       <MainCarousel />
-
-      <div className="container mt-5">
+      <div className="container">
         <Title title="Experience the beauty of rural life" />
-        <br />
-
-        {/* Dropdown de destino con botón verde */}
-        <div className="dropdown mb-4">
-          <button
-            className="btn btn-success dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Select a destination
-          </button>
-          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li>
-              <button
-                className="dropdown-item"
-                onClick={() => handleDestinationChange("")}
-              >
-                All Destinations
-              </button>
-            </li>
-            <li>
-              <button
-                className="dropdown-item"
-                onClick={() => handleDestinationChange("Barcelona")}
-              >
-                Barcelona
-              </button>
-            </li>
-            <li>
-              <button
-                className="dropdown-item"
-                onClick={() => handleDestinationChange("Valencia")}
-              >
-                Valencia
-              </button>
-            </li>
-            <li>
-              <button
-                className="dropdown-item"
-                onClick={() => handleDestinationChange("Madrid")}
-              >
-                Madrid
-              </button>
-            </li>
-            <li>
-              <button
-                className="dropdown-item"
-                onClick={() => handleDestinationChange("Zaragoza")}
-              >
-                Zaragoza
-              </button>
-            </li>
-            <li>
-              <button
-                className="dropdown-item"
-                onClick={() => handleDestinationChange("Bilbao")}
-              >
-                Bilbao
-              </button>
-            </li>
-            <li>
-              <button
-                className="dropdown-item"
-                onClick={() => handleDestinationChange("Malaga")}
-              >
-                Málaga
-              </button>
-            </li>
-          </ul>
-        </div>
-
-        {/* Cards de casas filtradas */}
-        <div className="row">
-          {filteredHouses.length > 0 ? (
-            filteredHouses.map((house, index) => (
+        {/* cards */}
+        <div className="container mt-4">
+          <div className="row">
+            {store.houses.map((house, index) => (
               <HouseCard key={index} house={house} index={index} />
-            ))
-          ) : (
-            <p>No houses found for the selected destination.</p>
-          )}
+            ))}
+          </div>
+          {/* end of cards */}
         </div>
       </div>
     </div>

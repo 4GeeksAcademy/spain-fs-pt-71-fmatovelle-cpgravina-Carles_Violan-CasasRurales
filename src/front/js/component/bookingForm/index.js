@@ -1,8 +1,12 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookingsCalendar } from "./bookingsCalendar";
-import { Context } from "../store/appContext";
-import { Modal } from "./Modal";
+import { BookingsCalendar } from "../bookingsCalendar"; // Adjusted path
+
+
+import { Context } from "../../store/appContext"; // Adjusted path
+
+import { Modal } from "../Modal"; // Adjusted path
+
 
 export const BookingForm = ({ house }) => {
   const { actions } = useContext(Context);
@@ -40,16 +44,14 @@ export const BookingForm = ({ house }) => {
 
   return (
     <div className="booking-form">
-      <h2>Check availability</h2>
-      <BookingsCalendar onDateChange={handleDateChange} />
-
-      <button
-        className="btn search-button btn-lg mb-5"
-        onClick={handleSubmit}
-        role="button"
-      >
-        Book this house
+      <div className="bookings-calendar">
+        <BookingsCalendar onDateChange={handleDateChange} />
+      </div>
+      <button className="btn search-button" onClick={handleSubmit}>
+        Book this property
       </button>
+
+
 
       {/* Modal */}
       <Modal

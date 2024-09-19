@@ -1,0 +1,123 @@
+/* Booking Form Container */
+
+.booking-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Card-like shadow */
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin: 0 auto; /* Center the form on the page */
+  }
+  
+  /* Booking Form Header */
+  .booking-form h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #2c3e50; /* Darker heading for better visibility */
+    font-weight: 700; /* Bold heading */
+  }
+  
+  /* Button Styling */
+  .booking-form .btn {
+    background-color: rgb(91, 173, 9, 0.658); /* Green background for primary action */
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    display: block; /* Block button for full width */
+    width: 100%; /* Full width button */
+    max-width: 250px; /* Limit the width for better appearance */
+    margin: 20px auto; /* Center the button */
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .booking-form .btn:hover {
+    background-color: #4caf50; /* Darker green on hover */
+  }
+  
+  /* Bookings Calendar Component */
+  .bookings-calendar {
+    margin-bottom: 30px;
+  }
+  
+  /* Modal Component */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  
+  .modal.is-visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    text-align: center;
+  }
+  
+  /* Modal Header */
+  .modal-content h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  /* Modal Message */
+  .modal-message {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 1rem;
+  }
+  
+  /* Modal Buttons */
+  .modal-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .modal-button.confirm {
+    background-color: rgb(91, 173, 9, 0.658);
+    color: #fff;
+  }
+  
+  .modal-button.confirm:hover {
+    background-color: #4caf50;
+  }
+  
+  .modal-button.cancel {
+    background-color: #dc3545; /* Red background for cancel */
+    color: #fff;
+  }
+  
+  .modal-button.cancel:hover {
+    background-color: #c82333;
+  }
+  
+
+  

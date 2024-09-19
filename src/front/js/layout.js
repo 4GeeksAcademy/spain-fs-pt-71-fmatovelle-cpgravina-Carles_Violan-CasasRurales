@@ -5,7 +5,7 @@ import { BackendURL } from "./component/backendURL";
 
 
 import { Home } from "./pages/home";
-import { Single } from "./pages/single";
+import { SingleHouse } from "./pages/singleHouse";
 import { Favorites } from "./pages/favorites.js";
 import { MainPage } from "./component/MainPage.js";
 
@@ -18,7 +18,8 @@ import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 
 import { Checkout } from './component/checkout/Checkout.js'
-import { Profile } from "./pages/profile.js";
+import { Profile } from './pages/profile';
+
 
 
 
@@ -51,7 +52,7 @@ const Layout = () => {
             
             <Route element={<Profile />} path="/profile" />
             <Route element={<Register />} path="/register"  />          
-            <Route element={<Single />} path="/single/:theid" />
+            <Route element={<SingleHouse />} path="/singleHouse/:theid" />
             <Route element={<Feedback />} path="/feedback" />
             <Route element={<Checkout />} path="/Checkout" />
             <Route element={<Favorites />} path="/favorites" />
